@@ -1,6 +1,6 @@
 {
   "name": "@vue-interface/input-field",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.6",
   "description": "A Vue input field component.",
   "files": [
     "dist"
@@ -8,13 +8,15 @@
   "type": "module",
   "main": "./dist/input-field.umd.cjs",
   "module": "./dist/input-field.js",
+  "style": "./dist/style.css",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/input-field.js",
       "require": "./dist/input-field.umd.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./dist/style.css": "./dist/style.css"
   },
   "browserslist": "last 2 versions, > 0.5%, ie >= 11",
   "scripts": {
@@ -46,7 +48,7 @@
   },
   "homepage": "https://github.com/vue-interface/input-field/docs#readme",
   "dependencies": {
-    "@vue-interface/activity-indicator": "^2.0.0-beta.0",
+    "@vue-interface/activity-indicator": "^2.0.0-beta.7",
     "@vue-interface/form-control": "^1.0.0-beta.9"
   },
   "peerDependencies": {
