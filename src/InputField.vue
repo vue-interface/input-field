@@ -1,3 +1,23 @@
+<script lang="ts">
+import { ActivityIndicator } from '@vue-interface/activity-indicator';
+import { FormControl } from '@vue-interface/form-control';
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+
+    name: 'InputField',
+    
+    components: {
+        ActivityIndicator
+    },
+
+    mixins: [
+        FormControl
+    ]
+
+});
+</script>
+
 <template>
     <div :class="formGroupClasses">
         <slot name="label">
@@ -11,11 +31,21 @@
         </slot>
 
         <div class="form-group-inner">
-            <slot name="control" :bind-events="bindEvents" :control-attributes="controlAttributes" :focus="focus">
-                <div v-if="$slots.icon" class="form-group-inner-icon" @click="focus">
+            <slot
+                name="control"
+                :bind-events="bindEvents"
+                :control-attributes="controlAttributes"
+                :focus="focus">
+                <div
+                    v-if="$slots.icon"
+                    class="form-group-inner-icon"
+                    @click="focus">
                     <slot name="icon" />
                 </div>
-                <input ref="field" v-bind-events v-bind="controlAttributes">
+                <input
+                    ref="field"
+                    v-bind-events
+                    v-bind="controlAttributes">
             </slot>
 
             <slot name="activity">
@@ -44,32 +74,14 @@
         </slot>
 
         <slot name="help">
-            <small v-if="helpText" ref="help">
+            <small
+                v-if="helpText"
+                ref="help">
                 {{ helpText }}
             </small>
         </slot>
     </div>
 </template>
-
-<script lang="ts">
-import { ActivityIndicator } from '@vue-interface/activity-indicator';
-import { FormControl } from '@vue-interface/form-control';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-
-    name: 'InputField',
-    
-    components: {
-        ActivityIndicator
-    },
-
-    mixins: [
-        FormControl
-    ]
-
-});
-</script>
 
 <style>
 .input-field,

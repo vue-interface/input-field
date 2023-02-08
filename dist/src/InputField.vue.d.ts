@@ -1,4 +1,7 @@
 declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, import("vue").DefineComponent<{
+    modelValue: {
+        default: undefined;
+    };
     activity: {
         type: BooleanConstructor;
         default: boolean;
@@ -20,7 +23,7 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         default: undefined;
     };
     errors: {
-        type: (BooleanConstructor | ArrayConstructor | ObjectConstructor)[];
+        type: (BooleanConstructor | ObjectConstructor | ArrayConstructor)[];
         default(): {};
     };
     feedback: {
@@ -53,9 +56,6 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
     labelClass: {
         type: (StringConstructor | ObjectConstructor)[];
         default: () => any;
-    };
-    modelValue: {
-        default: undefined;
     };
     pill: BooleanConstructor;
     plaintext: BooleanConstructor;
@@ -153,7 +153,10 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
     dropShadow: string | boolean;
     dropShadowableClassPrefix: string;
     shadowableClassPrefix: string;
-}>, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, import("vue").ComponentOptionsMixin, ("blur" | "change" | "click" | "focus" | "keydown" | "keypress" | "keyup" | "update:modelValue")[], "blur" | "change" | "click" | "focus" | "keydown" | "keypress" | "keyup" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    modelValue: {
+        default: undefined;
+    };
     activity: {
         type: BooleanConstructor;
         default: boolean;
@@ -175,7 +178,7 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         default: undefined;
     };
     errors: {
-        type: (BooleanConstructor | ArrayConstructor | ObjectConstructor)[];
+        type: (BooleanConstructor | ObjectConstructor | ArrayConstructor)[];
         default(): {};
     };
     feedback: {
@@ -209,9 +212,6 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         type: (StringConstructor | ObjectConstructor)[];
         default: () => any;
     };
-    modelValue: {
-        default: undefined;
-    };
     pill: BooleanConstructor;
     plaintext: BooleanConstructor;
     size: {
@@ -223,7 +223,17 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         default: undefined;
     };
     valid: BooleanConstructor;
-}>>, {
+}>> & {
+    onBlur?: ((...args: any[]) => any) | undefined;
+    onChange?: ((...args: any[]) => any) | undefined;
+    onClick?: ((...args: any[]) => any) | undefined;
+    onFocus?: ((...args: any[]) => any) | undefined;
+    onKeydown?: ((...args: any[]) => any) | undefined;
+    onKeypress?: ((...args: any[]) => any) | undefined;
+    onKeyup?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+}, {
+    modelValue: undefined;
     activity: boolean;
     animated: boolean;
     nativeEvents: unknown[];
@@ -240,7 +250,6 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
     invalid: boolean;
     label: string | number;
     labelClass: string | Record<string, any>;
-    modelValue: undefined;
     pill: boolean;
     plaintext: boolean;
     size: string;
