@@ -20,14 +20,9 @@
   },
   "browserslist": "last 2 versions, > 0.5%, ie >= 11",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --watch",
     "build": "vite build",
-    "preview": "vite preview",
-    "pre-release": "npm run build; git add . -A; git commit -m 'pre-release commit'",
-    "release-patch": "npm run pre-release && npm version patch -m \"%s\" && npm run release;",
-    "release-minor": "npm run pre-release && npm version minor -m \"%s\" && npm run release;",
-    "release-major": "npm run pre-release && npm version major -m \"%s\" && npm run release;",
-    "release": "git add . -A; git commit; git push --tags origin; npm publish;"
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -48,25 +43,23 @@
   },
   "homepage": "https://github.com/vue-interface/input-field/docs#readme",
   "dependencies": {
-    "@vue-interface/activity-indicator": "^2.0.0-beta.7",
-    "@vue-interface/form-control": "^1.0.0-beta.9"
+    "@vue-interface/activity-indicator": "*",
+    "@vue-interface/form-control": "*"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.0.3",
     "@vitejs/plugin-vue": "^3.0.1",
     "@vue/eslint-config-typescript": "^11.0.2",
     "autoprefixer": "^10.4.2",
-    "babel-eslint": "^10.1.0",
-    "babel-preset-vue": "^2.0.2",
     "change-case": "^4.1.2",
     "eslint": "^8.28.0",
     "eslint-plugin-vue": "^9.8.0",
     "pascalcase": "^2.0.0",
     "postcss": "^8.4.6",
     "tailwindcss": "^3.0.18",
+    "typescript": "^4.0.0",
     "vite": "^3.0.0",
     "vite-plugin-dts": "^1.7.1",
     "vue": "^3.2.37"

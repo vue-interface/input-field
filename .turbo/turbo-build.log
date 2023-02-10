@@ -1,0 +1,11 @@
+
+> @vue-interface/input-field@1.0.0-beta.7 build /Users/justinkimbrell/Code/vue-interface/packages/input-field
+> vite build
+
+vite v3.2.5 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+dist/style.css        1.67 KiB / gzip: 0.46 KiB
+dist/input-field.js   20.98 KiB / gzip: 6.28 KiB
+dist/input-field.umd.cjs   15.93 KiB / gzip: 5.68 KiB
