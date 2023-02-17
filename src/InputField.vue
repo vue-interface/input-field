@@ -38,7 +38,7 @@ export default defineComponent({
                 </div>
                 <input
                     ref="field"
-                    v-model="currentValue"
+                    v-model="model"
                     v-bind-events
                     v-bind="controlAttributes">
             </slot>
