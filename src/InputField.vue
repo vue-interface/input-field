@@ -33,8 +33,8 @@ export default defineComponent({
                 <input
                     ref="field"
                     v-model="currentValue"
-                    v-bind="controlAttributes"
-                    v-bind-events>
+                    v-bind-events
+                    v-bind="controlAttributes">
             </slot>
 
             <slot name="activity">

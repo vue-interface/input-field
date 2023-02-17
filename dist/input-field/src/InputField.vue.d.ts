@@ -1,7 +1,4 @@
-declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, import("vue").DefineComponent<{
-    modelValue: {
-        default: undefined;
-    };
+declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").DefineComponent<{
     activity: {
         type: BooleanConstructor;
         default: boolean;
@@ -10,44 +7,38 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         type: BooleanConstructor;
         default: () => any;
     };
-    nativeEvents: {
-        type: ArrayConstructor;
-        default(): string[];
-    };
-    defaultControlClass: {
-        type: StringConstructor;
-        default: () => any;
+    controlClass: {
+        type: (StringConstructor | ObjectConstructor | ArrayConstructor)[];
+        default: undefined;
     };
     error: {
-        type: (BooleanConstructor | ArrayConstructor | StringConstructor)[];
+        type: (BooleanConstructor | StringConstructor | ArrayConstructor)[];
         default: undefined;
     };
     errors: {
-        type: (BooleanConstructor | ArrayConstructor | ObjectConstructor)[];
+        type: (BooleanConstructor | ObjectConstructor | ArrayConstructor)[];
         default(): {};
     };
     feedback: {
-        type: (ArrayConstructor | StringConstructor)[];
+        type: (StringConstructor | ArrayConstructor)[];
         default: undefined;
     };
-    group: {
-        type: BooleanConstructor;
+    formControlClass: {
+        type: (StringConstructor | ObjectConstructor | ArrayConstructor)[];
         default: () => any;
     };
     helpText: {
         type: (StringConstructor | NumberConstructor)[];
         default: undefined;
     };
-    hideLabel: BooleanConstructor;
     indicator: {
-        type: (BooleanConstructor | StringConstructor)[];
+        type: (BooleanConstructor | StringConstructor | ObjectConstructor)[];
         default: () => any;
     };
     indicatorSize: {
         type: StringConstructor;
         default: undefined;
     };
-    inline: BooleanConstructor;
     invalid: BooleanConstructor;
     label: {
         type: (StringConstructor | NumberConstructor)[];
@@ -57,59 +48,49 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         type: (StringConstructor | ObjectConstructor)[];
         default: () => any;
     };
-    pill: BooleanConstructor;
+    modelValue: {
+        type: (StringConstructor | ObjectConstructor | ArrayConstructor | NumberConstructor)[];
+        default: undefined;
+    };
     plaintext: BooleanConstructor;
     size: {
         type: StringConstructor;
         default: undefined;
     };
-    spacing: {
-        type: StringConstructor;
-        default: undefined;
-    };
     valid: BooleanConstructor;
 }, unknown, {
-    defaultEmpty: boolean;
+    currentValue: string | number | unknown[] | Record<string, any> | undefined;
     hasChanged: boolean;
     hasFocus: boolean;
+    isDirty: boolean;
     isEmpty: boolean;
 }, {
-    id(): any;
+    id(): string | undefined;
     componentName(): any;
-    controlAttributes(): {
-        [k: string]: unknown;
-    };
-    controlClass(): any;
-    controlSizeClass(): string;
     formGroupClasses(): {
         [x: number]: boolean;
         animated: any;
-        'default-empty': any;
-        'form-group': any;
         'has-activity': any;
         'has-changed': any;
         'has-focus': any;
         'has-icon': boolean;
+        'is-dirty': any;
         'is-empty': any;
         'is-invalid': boolean;
         'is-valid': boolean;
     } & (false | {
         [x: string]: boolean;
     });
+    controlAttributes(): any;
     controlClasses(): any;
-    hasDefaultSlot(): boolean;
+    controlSizeClass(): string;
     invalidFeedback(): any;
-    pillClasses(): "rounded rounded-pill";
-    plaintextClass(): "form-control-plaintext";
     validFeedback(): any;
+    plaintextClass(): "form-control-plaintext";
 }, {
-    bindEvents(el: HTMLOptionElement | HTMLSelectElement, fn: Function): void;
     blur(): void;
     focus(): void;
-    getInputField(): any;
     getFieldErrors(): any;
-    shouldChangeOnFocus(): boolean;
-    onInput(value: any): void;
 }, import("vue").DefineComponent<{
     dropShadow: {
         type: (BooleanConstructor | StringConstructor)[];
@@ -153,10 +134,7 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
     dropShadow: string | boolean;
     dropShadowableClassPrefix: string;
     shadowableClassPrefix: string;
-}>, import("vue").ComponentOptionsMixin, ("blur" | "change" | "click" | "focus" | "keydown" | "keypress" | "keyup" | "update:modelValue")[], "blur" | "change" | "click" | "focus" | "keydown" | "keypress" | "keyup" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    modelValue: {
-        default: undefined;
-    };
+}>, import("vue").ComponentOptionsMixin, ("focus" | "blur" | "change" | "click" | "keypress" | "keyup" | "keydown" | "progress" | "paste" | "update:modelValue")[], "focus" | "blur" | "change" | "click" | "keypress" | "keyup" | "keydown" | "progress" | "paste" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     activity: {
         type: BooleanConstructor;
         default: boolean;
@@ -165,44 +143,38 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         type: BooleanConstructor;
         default: () => any;
     };
-    nativeEvents: {
-        type: ArrayConstructor;
-        default(): string[];
-    };
-    defaultControlClass: {
-        type: StringConstructor;
-        default: () => any;
+    controlClass: {
+        type: (StringConstructor | ObjectConstructor | ArrayConstructor)[];
+        default: undefined;
     };
     error: {
-        type: (BooleanConstructor | ArrayConstructor | StringConstructor)[];
+        type: (BooleanConstructor | StringConstructor | ArrayConstructor)[];
         default: undefined;
     };
     errors: {
-        type: (BooleanConstructor | ArrayConstructor | ObjectConstructor)[];
+        type: (BooleanConstructor | ObjectConstructor | ArrayConstructor)[];
         default(): {};
     };
     feedback: {
-        type: (ArrayConstructor | StringConstructor)[];
+        type: (StringConstructor | ArrayConstructor)[];
         default: undefined;
     };
-    group: {
-        type: BooleanConstructor;
+    formControlClass: {
+        type: (StringConstructor | ObjectConstructor | ArrayConstructor)[];
         default: () => any;
     };
     helpText: {
         type: (StringConstructor | NumberConstructor)[];
         default: undefined;
     };
-    hideLabel: BooleanConstructor;
     indicator: {
-        type: (BooleanConstructor | StringConstructor)[];
+        type: (BooleanConstructor | StringConstructor | ObjectConstructor)[];
         default: () => any;
     };
     indicatorSize: {
         type: StringConstructor;
         default: undefined;
     };
-    inline: BooleanConstructor;
     invalid: BooleanConstructor;
     label: {
         type: (StringConstructor | NumberConstructor)[];
@@ -212,48 +184,44 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         type: (StringConstructor | ObjectConstructor)[];
         default: () => any;
     };
-    pill: BooleanConstructor;
+    modelValue: {
+        type: (StringConstructor | ObjectConstructor | ArrayConstructor | NumberConstructor)[];
+        default: undefined;
+    };
     plaintext: BooleanConstructor;
     size: {
         type: StringConstructor;
         default: undefined;
     };
-    spacing: {
-        type: StringConstructor;
-        default: undefined;
-    };
     valid: BooleanConstructor;
 }>> & {
+    onFocus?: ((...args: any[]) => any) | undefined;
     onBlur?: ((...args: any[]) => any) | undefined;
     onChange?: ((...args: any[]) => any) | undefined;
     onClick?: ((...args: any[]) => any) | undefined;
-    onFocus?: ((...args: any[]) => any) | undefined;
-    onKeydown?: ((...args: any[]) => any) | undefined;
     onKeypress?: ((...args: any[]) => any) | undefined;
     onKeyup?: ((...args: any[]) => any) | undefined;
+    onKeydown?: ((...args: any[]) => any) | undefined;
+    onProgress?: ((...args: any[]) => any) | undefined;
+    onPaste?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
-    label: string | number;
-    size: string;
-    modelValue: undefined;
     activity: boolean;
     animated: boolean;
-    nativeEvents: unknown[];
-    defaultControlClass: string;
+    controlClass: string | unknown[] | Record<string, any>;
     error: string | boolean | unknown[];
     errors: boolean | unknown[] | Record<string, any>;
     feedback: string | unknown[];
-    group: boolean;
+    formControlClass: string | unknown[] | Record<string, any>;
     helpText: string | number;
-    hideLabel: boolean;
-    indicator: string | boolean;
+    indicator: string | boolean | Record<string, any>;
     indicatorSize: string;
-    inline: boolean;
     invalid: boolean;
+    label: string | number;
     labelClass: string | Record<string, any>;
-    pill: boolean;
+    modelValue: string | number | unknown[] | Record<string, any>;
     plaintext: boolean;
-    spacing: string;
+    size: string;
     valid: boolean;
-}>, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>;
+}>, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>;
 export default _sfc_main;

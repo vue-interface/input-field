@@ -1,184 +1,15 @@
-import { defineComponent as S, inject as nt, toRaw as rt, openBlock as s, createElementBlock as a, normalizeClass as j, normalizeStyle as st, createElementVNode as k, createBlock as H, resolveDynamicComponent as ot, toDisplayString as R, createCommentVNode as c, resolveComponent as at, resolveDirective as lt, renderSlot as u, withDirectives as ut, mergeProps as dt, createVNode as ct, Transition as ht, withCtx as ft } from "vue";
-var pt = Object.defineProperty, vt = (t, e, i) => e in t ? pt(t, e, { enumerable: !0, configurable: !0, writable: !0, value: i }) : t[e] = i, yt = (t, e, i) => (vt(t, typeof e != "symbol" ? e + "" : e, i), i), $ = function() {
-  return $ = Object.assign || function(t) {
-    for (var e, i = 1, r = arguments.length; i < r; i++) {
-      e = arguments[i];
-      for (var n in e)
-        Object.prototype.hasOwnProperty.call(e, n) && (t[n] = e[n]);
-    }
-    return t;
-  }, $.apply(this, arguments);
-};
-function gt(t) {
-  return t.toLowerCase();
-}
-var bt = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g], mt = /[^A-Z0-9]+/gi;
-function $t(t, e) {
-  e === void 0 && (e = {});
-  for (var i = e.splitRegexp, r = i === void 0 ? bt : i, n = e.stripRegexp, o = n === void 0 ? mt : n, g = e.transform, C = g === void 0 ? gt : g, l = e.delimiter, it = l === void 0 ? " " : l, b = w(w(t, r, "$1\0$2"), o, "\0"), E = 0, A = b.length; b.charAt(E) === "\0"; )
-    E++;
-  for (; b.charAt(A - 1) === "\0"; )
-    A--;
-  return b.slice(E, A).split("\0").map(C).join(it);
-}
-function w(t, e, i) {
-  return e instanceof RegExp ? t.replace(e, i) : e.reduce(function(r, n) {
-    return r.replace(n, i);
-  }, t);
-}
-function St(t, e) {
-  return e === void 0 && (e = {}), $t(t, $({ delimiter: "." }, e));
-}
-function m(t, e) {
-  return e === void 0 && (e = {}), St(t, $({ delimiter: "-" }, e));
-}
-let Ct = class {
-  constructor(e = {}) {
-    yt(this, "components"), this.components = /* @__PURE__ */ new Map(), Object.entries(e).forEach(([i, r]) => {
-      this.register(i, r);
-    });
-  }
-  get(e) {
-    const i = this.components.get(
-      e = m(e)
-    );
-    if (i)
-      return i;
-    throw new Error(`"${e}" has not been registered yet!`);
-  }
-  register(e, i) {
-    return typeof e == "object" ? (Object.entries(e).forEach(([r, n]) => {
-      this.register(m(r), n);
-    }), this) : (this.components.set(m(e), i), this);
-  }
-  remove(e) {
-    return this.components.delete(m(e)), this;
-  }
-  reset() {
-    return this.components = /* @__PURE__ */ new Map(), this;
-  }
-};
-function Et(t = {}) {
-  return new Ct(t);
-}
-const At = Et();
-function d(t, e = "px") {
-  return t != null && t !== !1 && isFinite(t) ? `${t}${e}` : t;
-}
-const xt = S({
-  props: {
-    absolute: Boolean,
-    center: Boolean,
-    label: {
-      type: String,
-      default: void 0
-    },
-    size: {
-      type: String,
-      default: "md"
-    },
-    registry: {
-      type: String,
-      default: "indicators"
-    },
-    type: {
-      type: [Object, String],
-      required: !0
-    },
-    height: {
-      type: [String, Number],
-      default: void 0
-    },
-    maxHeight: {
-      type: [String, Number],
-      default: void 0
-    },
-    minHeight: {
-      type: [String, Number],
-      default: void 0
-    },
-    width: {
-      type: [String, Number],
-      default: void 0
-    },
-    maxWidth: {
-      type: [String, Number],
-      default: void 0
-    },
-    minWidth: {
-      type: [String, Number],
-      default: void 0
-    }
-  },
-  data: () => ({
-    is: null
-  }),
-  computed: {
-    classes() {
-      return {
-        "activity-indicator-center": this.center,
-        "activity-indicator-absolute": this.absolute,
-        [this.size && `activity-indicator-${this.size}`]: !!this.size
-      };
-    },
-    style() {
-      return {
-        width: d(this.width),
-        maxWidth: d(this.maxWidth),
-        minWidth: d(this.minWidth),
-        height: d(this.height),
-        maxHeight: d(this.maxHeight),
-        minHeight: d(this.minHeight)
-      };
-    }
-  },
-  // async mounted() {
-  //     const component = await this.component();
-  //     this.is = () => component;
-  // },
-  methods: {
-    componentFromRegistry(t) {
-      var e;
-      try {
-        return (e = nt(this.registry || "indicators", At)) == null ? void 0 : e.get(t);
-      } catch {
-      }
-    },
-    component() {
-      return typeof this.type == "string" ? this.componentFromRegistry(this.type) : rt(this.type);
-    }
-  }
-}), jt = (t, e) => {
-  const i = t.__vccOpts || t;
-  for (const [r, n] of e)
-    i[r] = n;
-  return i;
-}, kt = { class: "activity-indicator-content" }, wt = {
-  key: 0,
-  class: "activity-indicator-label"
-};
-function Ot(t, e, i, r, n, o) {
-  return s(), a("div", {
-    class: j(["activity-indicator", t.classes]),
-    style: st(t.style)
-  }, [
-    k("div", kt, [
-      (s(), H(ot(t.component()), { class: "mx-auto" })),
-      t.label ? (s(), a("div", wt, R(t.label), 1)) : c("", !0)
-    ])
-  ], 6);
-}
-const zt = /* @__PURE__ */ jt(xt, [["render", Ot]]), p = {};
-function v(...t) {
-  if (!t.length)
-    return p;
-  const [e, i] = t;
-  return typeof e == "string" ? typeof p[e] < "u" ? p[e] : i : Array.isArray(e) ? e.reduce((r, n) => Object.assign(r, {
+import { defineComponent as S, resolveComponent as Be, resolveDirective as Ie, openBlock as u, createElementBlock as f, normalizeClass as N, renderSlot as h, toDisplayString as L, createCommentVNode as y, createElementVNode as V, withDirectives as Te, mergeProps as Ne, vModelDynamic as Le, createVNode as Ve, Transition as De, withCtx as Me, createBlock as Pe, normalizeProps as Ue, guardReactiveProps as Re } from "vue";
+const m = {};
+function s(...e) {
+  if (!e.length)
+    return m;
+  const [t, r] = e;
+  return typeof t == "string" ? typeof m[t] < "u" ? m[t] : r : Array.isArray(t) ? t.reduce((i, o) => Object.assign(i, {
     //@ts-ignore
-    [n]: p[n]
-  }), {}) : Object.assign(p, ...t);
+    [o]: m[o]
+  }), {}) : Object.assign(m, ...e);
 }
-const Ft = S({
+const oe = S({
   props: {
     dropShadow: {
       type: [Boolean, String],
@@ -199,79 +30,197 @@ const Ft = S({
   },
   computed: {
     shadowableClass() {
-      const t = this.dropShadow === !0 ? "" : this.dropShadow && `-${this.dropShadow}`, e = this.shadow === !0 ? "" : this.shadow && `-${this.shadow}`;
+      const e = this.dropShadow === !0 ? "" : this.dropShadow && `-${this.dropShadow}`, t = this.shadow === !0 ? "" : this.shadow && `-${this.shadow}`;
       return {
-        [`${this.dropShadowableClassPrefix}${t}`]: !!this.dropShadow,
-        [`${this.shadowableClassPrefix}${e}`]: !!this.shadow
+        [`${this.dropShadowableClassPrefix}${e}`]: !!this.dropShadow,
+        [`${this.shadowableClassPrefix}${t}`]: !!this.shadow
       };
     }
   }
 });
-var It = typeof global == "object" && global && global.Object === Object && global;
-const Lt = It;
-var Nt = typeof self == "object" && self && self.Object === Object && self, Tt = Lt || Nt || Function("return this")();
-const Bt = Tt;
-var Ht = Bt.Symbol;
-const f = Ht;
-var Z = Object.prototype, Rt = Z.hasOwnProperty, Zt = Z.toString, y = f ? f.toStringTag : void 0;
-function Mt(t) {
-  var e = Rt.call(t, y), i = t[y];
+var Ze = typeof global == "object" && global && global.Object === Object && global;
+const se = Ze;
+var Ge = typeof self == "object" && self && self.Object === Object && self, He = se || Ge || Function("return this")();
+const l = He;
+var _e = l.Symbol;
+const v = _e;
+var ae = Object.prototype, qe = ae.hasOwnProperty, We = ae.toString, g = v ? v.toStringTag : void 0;
+function Ye(e) {
+  var t = qe.call(e, g), r = e[g];
   try {
-    t[y] = void 0;
-    var r = !0;
+    e[g] = void 0;
+    var i = !0;
   } catch {
   }
-  var n = Zt.call(t);
-  return r && (e ? t[y] = i : delete t[y]), n;
+  var o = We.call(e);
+  return i && (t ? e[g] = r : delete e[g]), o;
 }
-var Dt = Object.prototype, Ut = Dt.toString;
-function Pt(t) {
-  return Ut.call(t);
+var Je = Object.prototype, Ke = Je.toString;
+function Qe(e) {
+  return Ke.call(e);
 }
-var Vt = "[object Null]", Wt = "[object Undefined]", O = f ? f.toStringTag : void 0;
-function Gt(t) {
-  return t == null ? t === void 0 ? Wt : Vt : O && O in Object(t) ? Mt(t) : Pt(t);
+var Xe = "[object Null]", et = "[object Undefined]", D = v ? v.toStringTag : void 0;
+function b(e) {
+  return e == null ? e === void 0 ? et : Xe : D && D in Object(e) ? Ye(e) : Qe(e);
 }
-function qt(t) {
-  return t != null && typeof t == "object";
+function A(e) {
+  return e != null && typeof e == "object";
 }
-var Yt = "[object Symbol]";
-function Jt(t) {
-  return typeof t == "symbol" || qt(t) && Gt(t) == Yt;
+var tt = "[object Symbol]";
+function rt(e) {
+  return typeof e == "symbol" || A(e) && b(e) == tt;
 }
-function Kt(t, e) {
-  for (var i = -1, r = t == null ? 0 : t.length, n = Array(r); ++i < r; )
-    n[i] = e(t[i], i, t);
-  return n;
+function it(e, t) {
+  for (var r = -1, i = e == null ? 0 : e.length, o = Array(i); ++r < i; )
+    o[r] = t(e[r], r, e);
+  return o;
 }
-var Xt = Array.isArray;
-const Qt = Xt;
-var _t = 1 / 0, z = f ? f.prototype : void 0, F = z ? z.toString : void 0;
-function M(t) {
-  if (typeof t == "string")
-    return t;
-  if (Qt(t))
-    return Kt(t, M) + "";
-  if (Jt(t))
-    return F ? F.call(t) : "";
-  var e = t + "";
-  return e == "0" && 1 / t == -_t ? "-0" : e;
+var nt = Array.isArray;
+const le = nt;
+var ot = 1 / 0, M = v ? v.prototype : void 0, P = M ? M.toString : void 0;
+function ue(e) {
+  if (typeof e == "string")
+    return e;
+  if (le(e))
+    return it(e, ue) + "";
+  if (rt(e))
+    return P ? P.call(e) : "";
+  var t = e + "";
+  return t == "0" && 1 / e == -ot ? "-0" : t;
 }
-function D(t) {
-  return t == null ? "" : M(t);
+function T(e) {
+  var t = typeof e;
+  return e != null && (t == "object" || t == "function");
 }
-function te(t, e, i, r) {
-  var n = -1, o = t == null ? 0 : t.length;
-  for (r && o && (i = t[++n]); ++n < o; )
-    i = e(i, t[n], n, t);
-  return i;
+var st = "[object AsyncFunction]", at = "[object Function]", lt = "[object GeneratorFunction]", ut = "[object Proxy]";
+function ce(e) {
+  if (!T(e))
+    return !1;
+  var t = b(e);
+  return t == at || t == lt || t == st || t == ut;
 }
-function ee(t) {
-  return function(e) {
-    return t == null ? void 0 : t[e];
+var ct = l["__core-js_shared__"];
+const E = ct;
+var U = function() {
+  var e = /[^.]+$/.exec(E && E.keys && E.keys.IE_PROTO || "");
+  return e ? "Symbol(src)_1." + e : "";
+}();
+function dt(e) {
+  return !!U && U in e;
+}
+var ft = Function.prototype, ht = ft.toString;
+function d(e) {
+  if (e != null) {
+    try {
+      return ht.call(e);
+    } catch {
+    }
+    try {
+      return e + "";
+    } catch {
+    }
+  }
+  return "";
+}
+var pt = /[\\^$.*+?()[\]{}|]/g, vt = /^\[object .+?Constructor\]$/, bt = Function.prototype, yt = Object.prototype, mt = bt.toString, gt = yt.hasOwnProperty, jt = RegExp(
+  "^" + mt.call(gt).replace(pt, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
+);
+function Ct(e) {
+  if (!T(e) || dt(e))
+    return !1;
+  var t = ce(e) ? jt : vt;
+  return t.test(d(e));
+}
+function St(e, t) {
+  return e == null ? void 0 : e[t];
+}
+function C(e, t) {
+  var r = St(e, t);
+  return Ct(r) ? r : void 0;
+}
+var At = C(l, "WeakMap");
+const x = At;
+var kt = 9007199254740991;
+function de(e) {
+  return typeof e == "number" && e > -1 && e % 1 == 0 && e <= kt;
+}
+function $t(e) {
+  return e != null && de(e.length) && !ce(e);
+}
+var Et = Object.prototype;
+function fe(e) {
+  var t = e && e.constructor, r = typeof t == "function" && t.prototype || Et;
+  return e === r;
+}
+var Ot = "[object Arguments]";
+function R(e) {
+  return A(e) && b(e) == Ot;
+}
+var he = Object.prototype, Ft = he.hasOwnProperty, xt = he.propertyIsEnumerable, wt = R(function() {
+  return arguments;
+}()) ? R : function(e) {
+  return A(e) && Ft.call(e, "callee") && !xt.call(e, "callee");
+};
+const zt = wt;
+function Bt() {
+  return !1;
+}
+var pe = typeof exports == "object" && exports && !exports.nodeType && exports, Z = pe && typeof module == "object" && module && !module.nodeType && module, It = Z && Z.exports === pe, G = It ? l.Buffer : void 0, Tt = G ? G.isBuffer : void 0, Nt = Tt || Bt;
+const Lt = Nt;
+var Vt = "[object Arguments]", Dt = "[object Array]", Mt = "[object Boolean]", Pt = "[object Date]", Ut = "[object Error]", Rt = "[object Function]", Zt = "[object Map]", Gt = "[object Number]", Ht = "[object Object]", _t = "[object RegExp]", qt = "[object Set]", Wt = "[object String]", Yt = "[object WeakMap]", Jt = "[object ArrayBuffer]", Kt = "[object DataView]", Qt = "[object Float32Array]", Xt = "[object Float64Array]", er = "[object Int8Array]", tr = "[object Int16Array]", rr = "[object Int32Array]", ir = "[object Uint8Array]", nr = "[object Uint8ClampedArray]", or = "[object Uint16Array]", sr = "[object Uint32Array]", n = {};
+n[Qt] = n[Xt] = n[er] = n[tr] = n[rr] = n[ir] = n[nr] = n[or] = n[sr] = !0;
+n[Vt] = n[Dt] = n[Jt] = n[Mt] = n[Kt] = n[Pt] = n[Ut] = n[Rt] = n[Zt] = n[Gt] = n[Ht] = n[_t] = n[qt] = n[Wt] = n[Yt] = !1;
+function ar(e) {
+  return A(e) && de(e.length) && !!n[b(e)];
+}
+function lr(e) {
+  return function(t) {
+    return e(t);
   };
 }
-var ie = {
+var ve = typeof exports == "object" && exports && !exports.nodeType && exports, j = ve && typeof module == "object" && module && !module.nodeType && module, ur = j && j.exports === ve, O = ur && se.process, cr = function() {
+  try {
+    var e = j && j.require && j.require("util").types;
+    return e || O && O.binding && O.binding("util");
+  } catch {
+  }
+}();
+const H = cr;
+var _ = H && H.isTypedArray, dr = _ ? lr(_) : ar;
+const fr = dr;
+function hr(e, t) {
+  return function(r) {
+    return e(t(r));
+  };
+}
+var pr = hr(Object.keys, Object);
+const vr = pr;
+var br = Object.prototype, yr = br.hasOwnProperty;
+function mr(e) {
+  if (!fe(e))
+    return vr(e);
+  var t = [];
+  for (var r in Object(e))
+    yr.call(e, r) && r != "constructor" && t.push(r);
+  return t;
+}
+var gr = C(l, "Map");
+const w = gr;
+function be(e) {
+  return e == null ? "" : ue(e);
+}
+function jr(e, t, r, i) {
+  var o = -1, a = e == null ? 0 : e.length;
+  for (i && a && (r = e[++o]); ++o < a; )
+    r = t(r, e[o], o, e);
+  return r;
+}
+function Cr(e) {
+  return function(t) {
+    return e == null ? void 0 : e[t];
+  };
+}
+var Sr = {
   // Latin-1 Supplement block.
   À: "A",
   Á: "A",
@@ -464,67 +413,354 @@ var ie = {
   œ: "oe",
   ŉ: "'n",
   ſ: "s"
-}, ne = ee(ie);
-const re = ne;
-var se = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g, oe = "\\u0300-\\u036f", ae = "\\ufe20-\\ufe2f", le = "\\u20d0-\\u20ff", ue = oe + ae + le, de = "[" + ue + "]", ce = RegExp(de, "g");
-function he(t) {
-  return t = D(t), t && t.replace(se, re).replace(ce, "");
+}, Ar = Cr(Sr);
+const kr = Ar;
+var $r = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g, Er = "\\u0300-\\u036f", Or = "\\ufe20-\\ufe2f", Fr = "\\u20d0-\\u20ff", xr = Er + Or + Fr, wr = "[" + xr + "]", zr = RegExp(wr, "g");
+function Br(e) {
+  return e = be(e), e && e.replace($r, kr).replace(zr, "");
 }
-var fe = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
-function pe(t) {
-  return t.match(fe) || [];
+var Ir = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
+function Tr(e) {
+  return e.match(Ir) || [];
 }
-var ve = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
-function ye(t) {
-  return ve.test(t);
+var Nr = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+function Lr(e) {
+  return Nr.test(e);
 }
-var U = "\\ud800-\\udfff", ge = "\\u0300-\\u036f", be = "\\ufe20-\\ufe2f", me = "\\u20d0-\\u20ff", $e = ge + be + me, P = "\\u2700-\\u27bf", V = "a-z\\xdf-\\xf6\\xf8-\\xff", Se = "\\xac\\xb1\\xd7\\xf7", Ce = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", Ee = "\\u2000-\\u206f", Ae = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", W = "A-Z\\xc0-\\xd6\\xd8-\\xde", xe = "\\ufe0e\\ufe0f", G = Se + Ce + Ee + Ae, q = "['’]", I = "[" + G + "]", je = "[" + $e + "]", Y = "\\d+", ke = "[" + P + "]", J = "[" + V + "]", K = "[^" + U + G + Y + P + V + W + "]", we = "\\ud83c[\\udffb-\\udfff]", Oe = "(?:" + je + "|" + we + ")", ze = "[^" + U + "]", X = "(?:\\ud83c[\\udde6-\\uddff]){2}", Q = "[\\ud800-\\udbff][\\udc00-\\udfff]", h = "[" + W + "]", Fe = "\\u200d", L = "(?:" + J + "|" + K + ")", Ie = "(?:" + h + "|" + K + ")", N = "(?:" + q + "(?:d|ll|m|re|s|t|ve))?", T = "(?:" + q + "(?:D|LL|M|RE|S|T|VE))?", _ = Oe + "?", tt = "[" + xe + "]?", Le = "(?:" + Fe + "(?:" + [ze, X, Q].join("|") + ")" + tt + _ + ")*", Ne = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", Te = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", Be = tt + _ + Le, He = "(?:" + [ke, X, Q].join("|") + ")" + Be, Re = RegExp([
-  h + "?" + J + "+" + N + "(?=" + [I, h, "$"].join("|") + ")",
-  Ie + "+" + T + "(?=" + [I, h + L, "$"].join("|") + ")",
-  h + "?" + L + "+" + N,
-  h + "+" + T,
-  Te,
-  Ne,
-  Y,
-  He
+var ye = "\\ud800-\\udfff", Vr = "\\u0300-\\u036f", Dr = "\\ufe20-\\ufe2f", Mr = "\\u20d0-\\u20ff", Pr = Vr + Dr + Mr, me = "\\u2700-\\u27bf", ge = "a-z\\xdf-\\xf6\\xf8-\\xff", Ur = "\\xac\\xb1\\xd7\\xf7", Rr = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", Zr = "\\u2000-\\u206f", Gr = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", je = "A-Z\\xc0-\\xd6\\xd8-\\xde", Hr = "\\ufe0e\\ufe0f", Ce = Ur + Rr + Zr + Gr, Se = "['’]", q = "[" + Ce + "]", _r = "[" + Pr + "]", Ae = "\\d+", qr = "[" + me + "]", ke = "[" + ge + "]", $e = "[^" + ye + Ce + Ae + me + ge + je + "]", Wr = "\\ud83c[\\udffb-\\udfff]", Yr = "(?:" + _r + "|" + Wr + ")", Jr = "[^" + ye + "]", Ee = "(?:\\ud83c[\\udde6-\\uddff]){2}", Oe = "[\\ud800-\\udbff][\\udc00-\\udfff]", p = "[" + je + "]", Kr = "\\u200d", W = "(?:" + ke + "|" + $e + ")", Qr = "(?:" + p + "|" + $e + ")", Y = "(?:" + Se + "(?:d|ll|m|re|s|t|ve))?", J = "(?:" + Se + "(?:D|LL|M|RE|S|T|VE))?", Fe = Yr + "?", xe = "[" + Hr + "]?", Xr = "(?:" + Kr + "(?:" + [Jr, Ee, Oe].join("|") + ")" + xe + Fe + ")*", ei = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", ti = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", ri = xe + Fe + Xr, ii = "(?:" + [qr, Ee, Oe].join("|") + ")" + ri, ni = RegExp([
+  p + "?" + ke + "+" + Y + "(?=" + [q, p, "$"].join("|") + ")",
+  Qr + "+" + J + "(?=" + [q, p + W, "$"].join("|") + ")",
+  p + "?" + W + "+" + Y,
+  p + "+" + J,
+  ti,
+  ei,
+  Ae,
+  ii
 ].join("|"), "g");
-function Ze(t) {
-  return t.match(Re) || [];
+function oi(e) {
+  return e.match(ni) || [];
 }
-function Me(t, e, i) {
-  return t = D(t), e = i ? void 0 : e, e === void 0 ? ye(t) ? Ze(t) : pe(t) : t.match(e) || [];
+function si(e, t, r) {
+  return e = be(e), t = r ? void 0 : t, t === void 0 ? Lr(e) ? oi(e) : Tr(e) : e.match(t) || [];
 }
-var De = "['’]", Ue = RegExp(De, "g");
-function Pe(t) {
-  return function(e) {
-    return te(Me(he(e).replace(Ue, "")), t, "");
+var ai = "['’]", li = RegExp(ai, "g");
+function ui(e) {
+  return function(t) {
+    return jr(si(Br(t).replace(li, "")), e, "");
   };
 }
-var Ve = Pe(function(t, e, i) {
-  return t + (i ? "-" : "") + e.toLowerCase();
+var ci = C(l, "DataView");
+const z = ci;
+var di = C(l, "Promise");
+const B = di;
+var fi = C(l, "Set");
+const I = fi;
+var K = "[object Map]", hi = "[object Object]", Q = "[object Promise]", X = "[object Set]", ee = "[object WeakMap]", te = "[object DataView]", pi = d(z), vi = d(w), bi = d(B), yi = d(I), mi = d(x), c = b;
+(z && c(new z(new ArrayBuffer(1))) != te || w && c(new w()) != K || B && c(B.resolve()) != Q || I && c(new I()) != X || x && c(new x()) != ee) && (c = function(e) {
+  var t = b(e), r = t == hi ? e.constructor : void 0, i = r ? d(r) : "";
+  if (i)
+    switch (i) {
+      case pi:
+        return te;
+      case vi:
+        return K;
+      case bi:
+        return Q;
+      case yi:
+        return X;
+      case mi:
+        return ee;
+    }
+  return t;
 });
-const et = Ve;
-function x(t, e, i = "-") {
-  const r = String(e).replace(new RegExp(`^${t}${i}?`), "");
+const gi = c;
+var ji = "[object Map]", Ci = "[object Set]", Si = Object.prototype, Ai = Si.hasOwnProperty;
+function re(e) {
+  if (e == null)
+    return !0;
+  if ($t(e) && (le(e) || typeof e == "string" || typeof e.splice == "function" || Lt(e) || fr(e) || zt(e)))
+    return !e.length;
+  var t = gi(e);
+  if (t == ji || t == Ci)
+    return !e.size;
+  if (fe(e))
+    return !mr(e).length;
+  for (var r in e)
+    if (Ai.call(e, r))
+      return !1;
+  return !0;
+}
+var ki = ui(function(e, t, r) {
+  return e + (r ? "-" : "") + t.toLowerCase();
+});
+const k = ki;
+function ie(e, t, r = "-") {
+  const i = String(t).replace(new RegExp(`^${e}${r}?`), "");
   return [
-    et(r),
-    t
-  ].filter((n) => !!n).join(i);
+    k(i),
+    e
+  ].filter((o) => !!o).join(r);
 }
-function B(t) {
-  return !Array.isArray(t) && typeof t == "object";
+const $i = S({
+  directives: {
+    bindEvents(e, t) {
+      var r;
+      for (const i of (r = t.instance) == null ? void 0 : r.$options.emits)
+        e.addEventListener(i, (o) => {
+          var a;
+          (a = t.instance) == null || a.$emit(i, o);
+        });
+      e.addEventListener("focus", () => {
+        t.instance.isDirty = !0, t.instance.hasFocus = !0;
+      }), e.addEventListener("blur", () => {
+        t.instance.hasFocus = !1;
+      });
+    }
+  },
+  mixins: [
+    oe
+  ],
+  inheritAttrs: !1,
+  props: {
+    /**
+     * Show type activity indicator.
+     */
+    activity: {
+      type: Boolean,
+      default: !1
+    },
+    /**
+     * Animate floating labels inside the input.
+     */
+    animated: {
+      type: Boolean,
+      default: () => s("animated", !1)
+    },
+    /**
+     * Additional classes assigned to the control element. These do not
+     * override any of the classes assigned by the FormControl.
+     */
+    controlClass: {
+      type: [Array, Object, String],
+      default: void 0
+    },
+    /**
+     * An inline field validation error.
+     */
+    error: {
+      type: [String, Array, Boolean],
+      default: void 0
+    },
+    /**
+     * An inline field validation errors passed as object with key/value
+     * pairs. If errors passed as an object, the form name will be used for
+     * the key.
+     */
+    errors: {
+      type: [Array, Object, Boolean],
+      default() {
+        return {};
+      }
+    },
+    /**
+     * Some feedback to add to the field once the field is successfully
+     * valid.
+     */
+    feedback: {
+      type: [String, Array],
+      default: void 0
+    },
+    /**
+     * The primary class assigned to the form control.
+     */
+    formControlClass: {
+      type: [Array, Object, String],
+      default: () => s("controlClass", "form-control")
+    },
+    /**
+     * Some instructions to appear under the field label.
+     */
+    helpText: {
+      type: [Number, String],
+      default: void 0
+    },
+    /**
+     * The activity indicator type.
+     */
+    indicator: {
+      type: [Object, String, Boolean],
+      default: () => s("indicator", "spinner")
+    },
+    /**
+     * The activity indicator size.
+     */
+    indicatorSize: {
+      type: String,
+      default: void 0
+    },
+    /**
+     * Force the input to be invalid.
+     */
+    invalid: Boolean,
+    /**
+     * The value of label element. If no value, no label will appear.
+     */
+    label: {
+      type: [Number, String],
+      default: void 0
+    },
+    /**
+     * The default label class assigned to the label element.
+     */
+    labelClass: {
+      type: [Object, String],
+      default: () => s("labelClass", "form-label")
+    },
+    /**
+     * The model default value.
+     */
+    modelValue: {
+      type: [Number, String, Array, Object],
+      default: void 0
+    },
+    /**
+     * Should the control look like plaintext.
+     */
+    plaintext: Boolean,
+    /**
+     * The size of the form control.
+     */
+    size: {
+      type: String,
+      default: void 0
+    },
+    /**
+     * Force the input to be valid.
+     */
+    valid: Boolean
+  },
+  emits: [
+    "focus",
+    "blur",
+    "change",
+    "click",
+    "keypress",
+    "keyup",
+    "keydown",
+    "progress",
+    "paste",
+    "update:modelValue"
+  ],
+  data() {
+    return {
+      currentValue: this.modelValue,
+      hasChanged: !1,
+      hasFocus: !1,
+      isDirty: !1,
+      isEmpty: re(this.modelValue)
+    };
+  },
+  computed: {
+    id() {
+      return this.$attrs.id || this.$attrs.name || Math.random().toString(36).slice(2);
+    },
+    componentName() {
+      return this.$options.name;
+    },
+    formGroupClasses() {
+      return Object.assign({
+        animated: this.animated,
+        "has-activity": this.activity,
+        "has-changed": this.hasChanged,
+        "has-focus": this.hasFocus,
+        "has-icon": !!this.$slots.icon,
+        "is-dirty": this.isDirty,
+        "is-empty": this.isEmpty,
+        "is-invalid": !!(this.invalid || this.invalidFeedback),
+        "is-valid": !!(this.valid || this.validFeedback),
+        [this.$attrs.class]: !!this.$attrs.class,
+        [this.size && ie(this.size, this.componentName)]: !!this.size
+      }, !!this.componentName && {
+        [k(this.componentName)]: !0
+      });
+    },
+    controlAttributes() {
+      return Object.assign({}, this.$attrs, {
+        id: this.id,
+        class: this.controlClasses,
+        value: this.modelValue
+      });
+    },
+    controlClasses() {
+      return Object.assign({
+        [this.controlClass]: !!this.controlClass,
+        [this.controlSizeClass]: !!this.controlSizeClass,
+        [this.formControlClass]: !!this.formControlClass,
+        [this.plaintextClass]: this.plaintext,
+        "form-control-icon": !!this.$slots.icon,
+        "is-valid": !!(this.valid || this.validFeedback),
+        "is-invalid": !!(this.invalid || this.invalidFeedback)
+      }, this.shadowableClass);
+    },
+    controlSizeClass() {
+      return ie(this.size, this.formControlClass);
+    },
+    invalidFeedback() {
+      if (this.error === "")
+        return null;
+      if (this.error)
+        return this.error;
+      const e = this.getFieldErrors();
+      return Array.isArray(e) ? e.filter((t) => t && typeof t == "string").join("<br>") : e;
+    },
+    validFeedback() {
+      return Array.isArray(this.feedback) ? this.feedback.join("<br>") : this.feedback;
+    },
+    plaintextClass() {
+      return "form-control-plaintext";
+    }
+  },
+  watch: {
+    currentValue(e) {
+      this.hasChanged = !0, this.isEmpty = re(e), this.$emit("update:modelValue", e);
+    }
+  },
+  methods: {
+    blur() {
+      var e;
+      (e = this.$refs.field) == null || e.blur();
+    },
+    focus() {
+      var e;
+      (e = this.$refs.field) == null || e.focus();
+    },
+    getFieldErrors() {
+      let e = this.error || this.errors;
+      return this.errors && !Array.isArray(this.errors) && (e = this.errors[this.$attrs.name || this.$attrs.id]), !e || Array.isArray(e) || T(e) ? e : [e];
+    }
+  }
+});
+function F(e, t, r = "-") {
+  const i = String(t).replace(new RegExp(`^${e}${r}?`), "");
+  return [
+    k(i),
+    e
+  ].filter((o) => !!o).join(r);
 }
-const We = S({
+function ne(e) {
+  return !Array.isArray(e) && typeof e == "object";
+}
+S({
   directives: {
     bindEvents: {
-      beforeMount(t, e) {
-        var i, r;
-        (r = (i = e.instance) == null ? void 0 : i.bindEvents) == null || r.call(i, t);
+      beforeMount(e, t) {
+        var r, i;
+        (i = (r = t.instance) == null ? void 0 : r.bindEvents) == null || i.call(r, e);
       }
     }
   },
   mixins: [
-    Ft
+    oe
   ],
   inheritAttrs: !1,
   props: {
@@ -543,7 +779,7 @@ const We = S({
      */
     animated: {
       type: Boolean,
-      default: () => v("animated", !1)
+      default: () => s("animated", !1)
     },
     /**
      * An array of event names that correlate with callback functions.
@@ -559,7 +795,7 @@ const We = S({
      */
     defaultControlClass: {
       type: String,
-      default: () => v("defaultControlClass", "form-control")
+      default: () => s("defaultControlClass", "form-control")
     },
     /**
      * An inline field validation error.
@@ -592,7 +828,7 @@ const We = S({
      */
     group: {
       type: Boolean,
-      default: () => v("group", !0)
+      default: () => s("group", !0)
     },
     /**
      * Some instructions to appear under the field label.
@@ -610,7 +846,7 @@ const We = S({
      */
     indicator: {
       type: [String, Boolean],
-      default: () => v("indicator", "spinner")
+      default: () => s("indicator", "spinner")
     },
     /**
      * The activity indicator size.
@@ -639,7 +875,7 @@ const We = S({
      */
     labelClass: {
       type: [Object, String],
-      default: () => v("labelClass", "form-label")
+      default: () => s("labelClass", "form-label")
     },
     /**
      * Should the control look like a pill.
@@ -706,15 +942,15 @@ const We = S({
       return this.defaultControlClass;
     },
     controlSizeClass() {
-      return x(this.size, this.controlClass);
+      return F(this.size, this.controlClass);
     },
     formGroupClasses() {
       return Object.assign({
-        [this.size && x(this.size, this.componentName)]: !!this.size,
+        [this.size && F(this.size, this.componentName)]: !!this.size,
         animated: this.animated,
         "default-empty": this.defaultEmpty,
         "form-group": this.group,
-        [this.size && x(this.size, "form-group")]: !!this.size,
+        [this.size && F(this.size, "form-group")]: !!this.size,
         "has-activity": this.activity,
         "has-changed": this.hasChanged,
         "has-focus": this.hasFocus,
@@ -725,7 +961,7 @@ const We = S({
         [this.$attrs.class]: !!this.$attrs.class,
         [this.$attrs.id]: !!this.$attrs.id
       }, !!this.componentName && {
-        [et(this.componentName)]: !0
+        [k(this.componentName)]: !0
       });
     },
     controlClasses() {
@@ -748,8 +984,8 @@ const We = S({
         return null;
       if (this.error)
         return this.error;
-      const t = this.getFieldErrors();
-      return Array.isArray(t) ? t.filter((e) => e && typeof e == "string").join("<br>") : t;
+      const e = this.getFieldErrors();
+      return Array.isArray(e) ? e.filter((t) => t && typeof t == "string").join("<br>") : e;
     },
     pillClasses() {
       return "rounded rounded-pill";
@@ -770,22 +1006,22 @@ const We = S({
     }
   },
   methods: {
-    bindEvents(t, e) {
-      var i;
-      e || (e = this.onInput);
-      const r = t instanceof HTMLSelectElement ? (i = t.querySelectorAll("option")) == null ? void 0 : i[t.selectedIndex] : null;
-      r && (t.value = r == null ? void 0 : r.value), t.value && e(t.value), this.hasChanged = !!t.value, this.isEmpty = !t.value, t.addEventListener("focus", () => {
+    bindEvents(e, t) {
+      var r;
+      t || (t = this.onInput);
+      const i = e instanceof HTMLSelectElement ? (r = e.querySelectorAll("option")) == null ? void 0 : r[e.selectedIndex] : null;
+      i && (e.value = i == null ? void 0 : i.value), e.value && t(e.value), this.hasChanged = !!e.value, this.isEmpty = !e.value, e.addEventListener("focus", () => {
         this.hasFocus = !0;
-      }), t.addEventListener("blur", () => {
+      }), e.addEventListener("blur", () => {
         this.hasFocus = !1;
-      }), t.addEventListener("input", () => {
+      }), e.addEventListener("input", () => {
         this.isEmpty = !1, this.hasChanged = !0;
-      }), t.addEventListener(
-        t.tagName === "SELECT" ? "change" : "input",
-        () => e(t.value)
-      ), this.nativeEvents.forEach((n) => {
-        t.addEventListener(n, (o) => {
-          this.$emit(n, o);
+      }), e.addEventListener(
+        e.tagName === "SELECT" ? "change" : "input",
+        () => t(e.value)
+      ), this.nativeEvents.forEach((o) => {
+        e.addEventListener(o, (a) => {
+          this.$emit(o, a);
         });
       });
     },
@@ -801,99 +1037,93 @@ const We = S({
       );
     },
     getFieldErrors() {
-      let t = this.error || this.errors;
-      return this.errors && B(this.errors) && (t = this.errors[this.$attrs.name || this.$attrs.id]), !t || Array.isArray(t) || B(t) ? t : [t];
+      let e = this.error || this.errors;
+      return this.errors && ne(this.errors) && (e = this.errors[this.$attrs.name || this.$attrs.id]), !e || Array.isArray(e) || ne(e) ? e : [e];
     },
     shouldChangeOnFocus() {
       return !this.getInputField().readOnly;
     },
-    onInput(t) {
-      this.$emit("update:modelValue", t);
+    onInput(e) {
+      this.$emit("update:modelValue", e);
     }
   }
-}), Ge = S({
-  name: "InputField",
-  components: {
-    ActivityIndicator: zt
-  },
-  mixins: [
-    We
-  ]
 });
-const qe = (t, e) => {
-  const i = t.__vccOpts || t;
-  for (const [r, n] of e)
-    i[r] = n;
-  return i;
-}, Ye = ["for", "innerHTML"], Je = { class: "form-group-inner" }, Ke = ["innerHTML"], Xe = ["innerHTML"];
-function Qe(t, e, i, r, n, o) {
-  const g = at("activity-indicator"), C = lt("bind-events");
-  return s(), a("div", {
-    class: j(t.formGroupClasses)
+const Ei = S({
+  name: "InputField",
+  extends: $i
+});
+const Oi = (e, t) => {
+  const r = e.__vccOpts || e;
+  for (const [i, o] of t)
+    r[i] = o;
+  return r;
+}, Fi = ["for"], xi = { class: "form-group-inner" }, wi = ["innerHTML"], zi = ["innerHTML"];
+function Bi(e, t, r, i, o, a) {
+  const we = Be("activity-indicator"), ze = Ie("bind-events");
+  return u(), f("div", {
+    class: N(["input-field form-group", e.formGroupClasses])
   }, [
-    u(t.$slots, "label", {}, () => [
-      t.label ? (s(), a("label", {
+    h(e.$slots, "label", {}, () => [
+      e.label ? (u(), f("label", {
         key: 0,
         ref: "label",
-        for: t.id,
-        class: j(t.labelClass),
-        onClick: e[0] || (e[0] = (...l) => t.focus && t.focus(...l)),
-        innerHTML: t.label
-      }, null, 10, Ye)) : c("", !0)
+        class: N(e.labelClass),
+        for: e.id
+      }, L(e.label), 11, Fi)) : y("", !0)
     ]),
-    k("div", Je, [
-      u(t.$slots, "control", {
-        bindEvents: t.bindEvents,
-        controlAttributes: t.controlAttributes,
-        focus: t.focus
-      }, () => [
-        t.$slots.icon ? (s(), a("div", {
+    V("div", xi, [
+      h(e.$slots, "control", {}, () => [
+        e.$slots.icon ? (u(), f("div", {
           key: 0,
           class: "form-group-inner-icon",
-          onClick: e[1] || (e[1] = (...l) => t.focus && t.focus(...l))
+          onClick: t[0] || (t[0] = (...$) => e.focus && e.focus(...$))
         }, [
-          u(t.$slots, "icon")
-        ])) : c("", !0),
-        ut(k("input", dt({ ref: "field" }, t.controlAttributes), null, 16), [
-          [C]
+          h(e.$slots, "icon")
+        ])) : y("", !0),
+        Te(V("input", Ne({
+          ref: "field",
+          "onUpdate:modelValue": t[1] || (t[1] = ($) => e.currentValue = $)
+        }, e.controlAttributes), null, 16), [
+          [Le, e.currentValue],
+          [ze]
         ])
       ]),
-      u(t.$slots, "activity", {}, () => [
-        ct(ht, { name: "input-field-fade" }, {
-          default: ft(() => [
-            t.activity ? (s(), H(g, {
+      h(e.$slots, "activity", {}, () => [
+        Ve(De, { name: "input-field-fade" }, {
+          default: Me(() => [
+            e.activity ? (u(), Pe(we, {
               key: "activity",
               ref: "activity",
-              type: t.indicator,
-              size: t.indicatorSize || t.size
-            }, null, 8, ["type", "size"])) : c("", !0)
+              type: e.indicator,
+              size: e.indicatorSize || e.size
+            }, null, 8, ["type", "size"])) : y("", !0)
           ]),
           _: 1
         })
       ])
     ]),
-    u(t.$slots, "feedback", {}, () => [
-      t.invalidFeedback ? (s(), a("div", {
+    h(e.$slots, "feedback", Ue(Re({ invalid: e.invalid, invalidFeedback: e.invalidFeedback, valid: e.valid, validFeedback: e.validFeedback })), () => [
+      e.invalidFeedback ? (u(), f("div", {
         key: 0,
         class: "invalid-feedback",
         invalid: "",
-        innerHTML: t.invalidFeedback
-      }, null, 8, Ke)) : t.validFeedback ? (s(), a("div", {
+        innerHTML: e.invalidFeedback
+      }, null, 8, wi)) : e.validFeedback ? (u(), f("div", {
         key: 1,
         class: "valid-feedback",
         valid: "",
-        innerHTML: t.validFeedback
-      }, null, 8, Xe)) : c("", !0)
+        innerHTML: e.validFeedback
+      }, null, 8, zi)) : y("", !0)
     ]),
-    u(t.$slots, "help", {}, () => [
-      t.helpText ? (s(), a("small", {
+    h(e.$slots, "help", {}, () => [
+      e.helpText ? (u(), f("small", {
         key: 0,
         ref: "help"
-      }, R(t.helpText), 513)) : c("", !0)
+      }, L(e.helpText), 513)) : y("", !0)
     ])
   ], 2);
 }
-const ei = /* @__PURE__ */ qe(Ge, [["render", Qe]]);
+const Ti = /* @__PURE__ */ Oi(Ei, [["render", Bi]]);
 export {
-  ei as InputField
+  Ti as InputField
 };
