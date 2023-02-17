@@ -14,7 +14,7 @@ export default defineComponent({
 
 <template>
     <div
-        class="input-field form-group"
+        class="input-field"
         :class="formGroupClasses">
         <slot name="label">
             <label
@@ -27,7 +27,9 @@ export default defineComponent({
         </slot>
 
         <div class="form-group-inner">
-            <slot name="control">
+            <slot
+                name="control"
+                v-bind="{ bindEvents, controlAttributes }">
                 <div
                     v-if="$slots.icon"
                     class="form-group-inner-icon"
