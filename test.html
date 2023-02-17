@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>InputField</title>
+    </head>
+    <body>
+        <div id="app" class="container mx-auto">
+            <h1 class="text-4xl mb-5">input-field</h1>
+
+            <h2 class="text-2xl mb-3">Basic Usage</h2>
+
+            <div class="bg-gray-100 p-3 mb-3">
+                Value: {{ value }}
+            </div>
+
+            <input-field
+                v-model="value"
+                class="mb-3"
+                id="some_field_id"
+                name="some_field_name"
+                label="Text Field"
+                placeholder="Some placeholder">
+            </input-field>
+        </div>
+
+        <script type="module">
+            import './index.css';
+            import { createApp } from 'vue/dist/vue.esm-bundler.js';
+            import { InputField } from './index';
+            import { ActivityIndicatorPlugin, Dots, Pulse, Spinner } from '@vue-interface/activity-indicator';
+            
+            const vue = createApp({
+                components: {
+                   InputField
+                },
+                data: () => ({
+                    value: null
+                })
+            });
+
+            vue.use(ActivityIndicatorPlugin, {
+                indicators: {
+                    Dots,
+                    Pulse,
+                    Spinner
+                }
+            });
+
+            vue.mount('#app');
+        </script>
+    </body>
+</html>

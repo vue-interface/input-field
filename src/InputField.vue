@@ -1,41 +1,29 @@
 <script lang="ts">
-import { ActivityIndicator } from '@vue-interface/activity-indicator';
 import { FormControl } from '@vue-interface/form-control';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-
     name: 'InputField',
-    
-    components: {
-        ActivityIndicator
-    },
-
-    mixins: [
-        FormControl
-    ]
-
+    extends: FormControl
 });
 </script>
 
 <template>
-    <div :class="formGroupClasses">
+    <div
+        class="input-field form-group"
+        :class="formGroupClasses">
         <slot name="label">
             <label
                 v-if="label"
                 ref="label"
-                :for="id"
                 :class="labelClass"
-                @click="focus"
-                v-html="label" />
+                :for="id">
+                {{ label }}
+            </label>
         </slot>
 
         <div class="form-group-inner">
-            <slot
-                name="control"
-                :bind-events="bindEvents"
-                :control-attributes="controlAttributes"
-                :focus="focus">
+            <slot name="control">
                 <div
                     v-if="$slots.icon"
                     class="form-group-inner-icon"
@@ -44,8 +32,9 @@ export default defineComponent({
                 </div>
                 <input
                     ref="field"
-                    v-bind-events
-                    v-bind="controlAttributes">
+                    v-model="currentValue"
+                    v-bind="controlAttributes"
+                    v-bind-events>
             </slot>
 
             <slot name="activity">
@@ -60,7 +49,9 @@ export default defineComponent({
             </slot>
         </div>
 
-        <slot name="feedback">
+        <slot
+            name="feedback"
+            v-bind="{ invalid, invalidFeedback, valid, validFeedback }">
             <div 
                 v-if="invalidFeedback"
                 class="invalid-feedback"
@@ -176,5 +167,4 @@ export default defineComponent({
     left: .4em;
     font-size: 1.75em;
 }
-
 </style>
