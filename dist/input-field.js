@@ -1,13 +1,13 @@
-import { defineComponent as C, inject as Pe, toRaw as Ue, openBlock as a, createElementBlock as u, normalizeClass as V, normalizeStyle as He, createElementVNode as R, createBlock as pe, resolveDynamicComponent as Ze, toDisplayString as D, createCommentVNode as y, resolveComponent as We, resolveDirective as Ge, renderSlot as p, withDirectives as qe, mergeProps as _e, vModelDynamic as Ye, createVNode as Je, Transition as Ke, withCtx as Qe, normalizeProps as Xe, guardReactiveProps as et } from "vue";
-var tt = Object.defineProperty, rt = (e, t, r) => t in e ? tt(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, it = (e, t, r) => (rt(e, typeof t != "symbol" ? t + "" : t, r), r), E = function() {
-  return E = Object.assign || function(e) {
+import { defineComponent as C, inject as He, toRaw as Ze, openBlock as s, createElementBlock as u, normalizeClass as R, normalizeStyle as We, createElementVNode as D, createBlock as ye, resolveDynamicComponent as Ge, toDisplayString as M, createCommentVNode as y, resolveComponent as qe, resolveDirective as Ye, renderSlot as p, normalizeProps as G, guardReactiveProps as q, withDirectives as _e, mergeProps as Je, vModelDynamic as Ke, createVNode as Qe, Transition as Xe, withCtx as et } from "vue";
+var tt = Object.defineProperty, rt = (e, t, r) => t in e ? tt(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, it = (e, t, r) => (rt(e, typeof t != "symbol" ? t + "" : t, r), r), x = function() {
+  return x = Object.assign || function(e) {
     for (var t, r = 1, i = arguments.length; r < i; r++) {
       t = arguments[r];
       for (var n in t)
         Object.prototype.hasOwnProperty.call(t, n) && (e[n] = t[n]);
     }
     return e;
-  }, E.apply(this, arguments);
+  }, x.apply(this, arguments);
 };
 function nt(e) {
   return e.toLowerCase();
@@ -15,22 +15,22 @@ function nt(e) {
 var ot = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g], st = /[^A-Z0-9]+/gi;
 function at(e, t) {
   t === void 0 && (t = {});
-  for (var r = t.splitRegexp, i = r === void 0 ? ot : r, n = t.stripRegexp, s = n === void 0 ? st : n, O = t.transform, z = O === void 0 ? nt : O, f = t.delimiter, Me = f === void 0 ? " " : f, k = G(G(e, i, "$1\0$2"), s, "\0"), B = 0, N = k.length; k.charAt(B) === "\0"; )
+  for (var r = t.splitRegexp, i = r === void 0 ? ot : r, n = t.stripRegexp, l = n === void 0 ? st : n, E = t.transform, z = E === void 0 ? nt : E, f = t.delimiter, Ue = f === void 0 ? " " : f, O = Y(Y(e, i, "$1\0$2"), l, "\0"), B = 0, N = O.length; O.charAt(B) === "\0"; )
     B++;
-  for (; k.charAt(N - 1) === "\0"; )
+  for (; O.charAt(N - 1) === "\0"; )
     N--;
-  return k.slice(B, N).split("\0").map(z).join(Me);
+  return O.slice(B, N).split("\0").map(z).join(Ue);
 }
-function G(e, t, r) {
+function Y(e, t, r) {
   return t instanceof RegExp ? e.replace(t, r) : t.reduce(function(i, n) {
     return i.replace(n, r);
   }, e);
 }
 function lt(e, t) {
-  return t === void 0 && (t = {}), at(e, E({ delimiter: "." }, t));
+  return t === void 0 && (t = {}), at(e, x({ delimiter: "." }, t));
 }
-function x(e, t) {
-  return t === void 0 && (t = {}), lt(e, E({ delimiter: "-" }, t));
+function k(e, t) {
+  return t === void 0 && (t = {}), lt(e, x({ delimiter: "-" }, t));
 }
 let ut = class {
   constructor(t = {}) {
@@ -40,7 +40,7 @@ let ut = class {
   }
   get(t) {
     const r = this.components.get(
-      t = x(t)
+      t = k(t)
     );
     if (r)
       return r;
@@ -48,11 +48,11 @@ let ut = class {
   }
   register(t, r) {
     return typeof t == "object" ? (Object.entries(t).forEach(([i, n]) => {
-      this.register(x(i), n);
-    }), this) : (this.components.set(x(t), r), this);
+      this.register(k(i), n);
+    }), this) : (this.components.set(k(t), r), this);
   }
   remove(t) {
-    return this.components.delete(x(t)), this;
+    return this.components.delete(k(t)), this;
   }
   reset() {
     return this.components = /* @__PURE__ */ new Map(), this;
@@ -140,12 +140,12 @@ const ht = C({
     componentFromRegistry(e) {
       var t;
       try {
-        return (t = Pe(this.registry || "indicators", dt)) == null ? void 0 : t.get(e);
+        return (t = He(this.registry || "indicators", dt)) == null ? void 0 : t.get(e);
       } catch {
       }
     },
     component() {
-      return typeof this.type == "string" ? this.componentFromRegistry(this.type) : Ue(this.type);
+      return typeof this.type == "string" ? this.componentFromRegistry(this.type) : Ze(this.type);
     }
   }
 }), ft = (e, t) => {
@@ -157,19 +157,19 @@ const ht = C({
   key: 0,
   class: "activity-indicator-label"
 };
-function yt(e, t, r, i, n, s) {
-  return a(), u("div", {
-    class: V(["activity-indicator", e.classes]),
-    style: He(e.style)
+function yt(e, t, r, i, n, l) {
+  return s(), u("div", {
+    class: R(["activity-indicator", e.classes]),
+    style: We(e.style)
   }, [
-    R("div", pt, [
-      (a(), pe(Ze(e.component()), { class: "mx-auto" })),
-      e.label ? (a(), u("div", vt, D(e.label), 1)) : y("", !0)
+    D("div", pt, [
+      (s(), ye(Ge(e.component()), { class: "mx-auto" })),
+      e.label ? (s(), u("div", vt, M(e.label), 1)) : y("", !0)
     ])
   ], 6);
 }
 const bt = /* @__PURE__ */ ft(ht, [["render", yt]]), j = {};
-function l(...e) {
+function a(...e) {
   if (!e.length)
     return j;
   const [t, r] = e;
@@ -178,7 +178,7 @@ function l(...e) {
     [n]: j[n]
   }), {}) : Object.assign(j, ...e);
 }
-const ve = C({
+const be = C({
   props: {
     dropShadow: {
       type: [Boolean, String],
@@ -208,29 +208,29 @@ const ve = C({
   }
 });
 var mt = typeof global == "object" && global && global.Object === Object && global;
-const ye = mt;
-var gt = typeof self == "object" && self && self.Object === Object && self, jt = ye || gt || Function("return this")();
+const me = mt;
+var gt = typeof self == "object" && self && self.Object === Object && self, jt = me || gt || Function("return this")();
 const c = jt;
-var $t = c.Symbol;
-const m = $t;
-var be = Object.prototype, St = be.hasOwnProperty, Ct = be.toString, $ = m ? m.toStringTag : void 0;
+var St = c.Symbol;
+const m = St;
+var ge = Object.prototype, $t = ge.hasOwnProperty, Ct = ge.toString, S = m ? m.toStringTag : void 0;
 function At(e) {
-  var t = St.call(e, $), r = e[$];
+  var t = $t.call(e, S), r = e[S];
   try {
-    e[$] = void 0;
+    e[S] = void 0;
     var i = !0;
   } catch {
   }
   var n = Ct.call(e);
-  return i && (t ? e[$] = r : delete e[$]), n;
+  return i && (t ? e[S] = r : delete e[S]), n;
 }
-var Ot = Object.prototype, kt = Ot.toString;
-function xt(e) {
-  return kt.call(e);
+var Et = Object.prototype, Ot = Et.toString;
+function kt(e) {
+  return Ot.call(e);
 }
-var Et = "[object Null]", wt = "[object Undefined]", q = m ? m.toStringTag : void 0;
+var xt = "[object Null]", wt = "[object Undefined]", _ = m ? m.toStringTag : void 0;
 function g(e) {
-  return e == null ? e === void 0 ? wt : Et : q && q in Object(e) ? At(e) : xt(e);
+  return e == null ? e === void 0 ? wt : xt : _ && _ in Object(e) ? At(e) : kt(e);
 }
 function w(e) {
   return e != null && typeof e == "object";
@@ -245,15 +245,15 @@ function Bt(e, t) {
   return n;
 }
 var Nt = Array.isArray;
-const me = Nt;
-var It = 1 / 0, _ = m ? m.prototype : void 0, Y = _ ? _.toString : void 0;
-function ge(e) {
+const je = Nt;
+var It = 1 / 0, J = m ? m.prototype : void 0, K = J ? J.toString : void 0;
+function Se(e) {
   if (typeof e == "string")
     return e;
-  if (me(e))
-    return Bt(e, ge) + "";
+  if (je(e))
+    return Bt(e, Se) + "";
   if (zt(e))
-    return Y ? Y.call(e) : "";
+    return K ? K.call(e) : "";
   var t = e + "";
   return t == "0" && 1 / e == -It ? "-0" : t;
 }
@@ -261,23 +261,23 @@ function W(e) {
   var t = typeof e;
   return e != null && (t == "object" || t == "function");
 }
-var Tt = "[object AsyncFunction]", Lt = "[object Function]", Vt = "[object GeneratorFunction]", Rt = "[object Proxy]";
-function je(e) {
+var Tt = "[object AsyncFunction]", Lt = "[object Function]", Rt = "[object GeneratorFunction]", Dt = "[object Proxy]";
+function $e(e) {
   if (!W(e))
     return !1;
   var t = g(e);
-  return t == Lt || t == Vt || t == Tt || t == Rt;
+  return t == Lt || t == Rt || t == Tt || t == Dt;
 }
-var Dt = c["__core-js_shared__"];
-const I = Dt;
-var J = function() {
+var Mt = c["__core-js_shared__"];
+const I = Mt;
+var Q = function() {
   var e = /[^.]+$/.exec(I && I.keys && I.keys.IE_PROTO || "");
   return e ? "Symbol(src)_1." + e : "";
 }();
-function Mt(e) {
-  return !!J && J in e;
+function Pt(e) {
+  return !!Q && Q in e;
 }
-var Pt = Function.prototype, Ut = Pt.toString;
+var Vt = Function.prototype, Ut = Vt.toString;
 function h(e) {
   if (e != null) {
     try {
@@ -291,13 +291,13 @@ function h(e) {
   }
   return "";
 }
-var Ht = /[\\^$.*+?()[\]{}|]/g, Zt = /^\[object .+?Constructor\]$/, Wt = Function.prototype, Gt = Object.prototype, qt = Wt.toString, _t = Gt.hasOwnProperty, Yt = RegExp(
-  "^" + qt.call(_t).replace(Ht, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
+var Ht = /[\\^$.*+?()[\]{}|]/g, Zt = /^\[object .+?Constructor\]$/, Wt = Function.prototype, Gt = Object.prototype, qt = Wt.toString, Yt = Gt.hasOwnProperty, _t = RegExp(
+  "^" + qt.call(Yt).replace(Ht, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
 );
 function Jt(e) {
-  if (!W(e) || Mt(e))
+  if (!W(e) || Pt(e))
     return !1;
-  var t = je(e) ? Yt : Zt;
+  var t = $e(e) ? _t : Zt;
   return t.test(h(e));
 }
 function Kt(e, t) {
@@ -308,55 +308,55 @@ function A(e, t) {
   return Jt(r) ? r : void 0;
 }
 var Qt = A(c, "WeakMap");
-const M = Qt;
+const P = Qt;
 var Xt = 9007199254740991;
-function $e(e) {
+function Ce(e) {
   return typeof e == "number" && e > -1 && e % 1 == 0 && e <= Xt;
 }
 function er(e) {
-  return e != null && $e(e.length) && !je(e);
+  return e != null && Ce(e.length) && !$e(e);
 }
 var tr = Object.prototype;
-function Se(e) {
+function Ae(e) {
   var t = e && e.constructor, r = typeof t == "function" && t.prototype || tr;
   return e === r;
 }
 var rr = "[object Arguments]";
-function K(e) {
+function X(e) {
   return w(e) && g(e) == rr;
 }
-var Ce = Object.prototype, ir = Ce.hasOwnProperty, nr = Ce.propertyIsEnumerable, or = K(function() {
+var Ee = Object.prototype, ir = Ee.hasOwnProperty, nr = Ee.propertyIsEnumerable, or = X(function() {
   return arguments;
-}()) ? K : function(e) {
+}()) ? X : function(e) {
   return w(e) && ir.call(e, "callee") && !nr.call(e, "callee");
 };
 const sr = or;
 function ar() {
   return !1;
 }
-var Ae = typeof exports == "object" && exports && !exports.nodeType && exports, Q = Ae && typeof module == "object" && module && !module.nodeType && module, lr = Q && Q.exports === Ae, X = lr ? c.Buffer : void 0, ur = X ? X.isBuffer : void 0, cr = ur || ar;
+var Oe = typeof exports == "object" && exports && !exports.nodeType && exports, ee = Oe && typeof module == "object" && module && !module.nodeType && module, lr = ee && ee.exports === Oe, te = lr ? c.Buffer : void 0, ur = te ? te.isBuffer : void 0, cr = ur || ar;
 const dr = cr;
-var hr = "[object Arguments]", fr = "[object Array]", pr = "[object Boolean]", vr = "[object Date]", yr = "[object Error]", br = "[object Function]", mr = "[object Map]", gr = "[object Number]", jr = "[object Object]", $r = "[object RegExp]", Sr = "[object Set]", Cr = "[object String]", Ar = "[object WeakMap]", Or = "[object ArrayBuffer]", kr = "[object DataView]", xr = "[object Float32Array]", Er = "[object Float64Array]", wr = "[object Int8Array]", Fr = "[object Int16Array]", zr = "[object Int32Array]", Br = "[object Uint8Array]", Nr = "[object Uint8ClampedArray]", Ir = "[object Uint16Array]", Tr = "[object Uint32Array]", o = {};
-o[xr] = o[Er] = o[wr] = o[Fr] = o[zr] = o[Br] = o[Nr] = o[Ir] = o[Tr] = !0;
-o[hr] = o[fr] = o[Or] = o[pr] = o[kr] = o[vr] = o[yr] = o[br] = o[mr] = o[gr] = o[jr] = o[$r] = o[Sr] = o[Cr] = o[Ar] = !1;
+var hr = "[object Arguments]", fr = "[object Array]", pr = "[object Boolean]", vr = "[object Date]", yr = "[object Error]", br = "[object Function]", mr = "[object Map]", gr = "[object Number]", jr = "[object Object]", Sr = "[object RegExp]", $r = "[object Set]", Cr = "[object String]", Ar = "[object WeakMap]", Er = "[object ArrayBuffer]", Or = "[object DataView]", kr = "[object Float32Array]", xr = "[object Float64Array]", wr = "[object Int8Array]", Fr = "[object Int16Array]", zr = "[object Int32Array]", Br = "[object Uint8Array]", Nr = "[object Uint8ClampedArray]", Ir = "[object Uint16Array]", Tr = "[object Uint32Array]", o = {};
+o[kr] = o[xr] = o[wr] = o[Fr] = o[zr] = o[Br] = o[Nr] = o[Ir] = o[Tr] = !0;
+o[hr] = o[fr] = o[Er] = o[pr] = o[Or] = o[vr] = o[yr] = o[br] = o[mr] = o[gr] = o[jr] = o[Sr] = o[$r] = o[Cr] = o[Ar] = !1;
 function Lr(e) {
-  return w(e) && $e(e.length) && !!o[g(e)];
+  return w(e) && Ce(e.length) && !!o[g(e)];
 }
-function Vr(e) {
+function Rr(e) {
   return function(t) {
     return e(t);
   };
 }
-var Oe = typeof exports == "object" && exports && !exports.nodeType && exports, S = Oe && typeof module == "object" && module && !module.nodeType && module, Rr = S && S.exports === Oe, T = Rr && ye.process, Dr = function() {
+var ke = typeof exports == "object" && exports && !exports.nodeType && exports, $ = ke && typeof module == "object" && module && !module.nodeType && module, Dr = $ && $.exports === ke, T = Dr && me.process, Mr = function() {
   try {
-    var e = S && S.require && S.require("util").types;
+    var e = $ && $.require && $.require("util").types;
     return e || T && T.binding && T.binding("util");
   } catch {
   }
 }();
-const ee = Dr;
-var te = ee && ee.isTypedArray, Mr = te ? Vr(te) : Lr;
-const Pr = Mr;
+const re = Mr;
+var ie = re && re.isTypedArray, Pr = ie ? Rr(ie) : Lr;
+const Vr = Pr;
 function Ur(e, t) {
   return function(r) {
     return e(t(r));
@@ -366,21 +366,21 @@ var Hr = Ur(Object.keys, Object);
 const Zr = Hr;
 var Wr = Object.prototype, Gr = Wr.hasOwnProperty;
 function qr(e) {
-  if (!Se(e))
+  if (!Ae(e))
     return Zr(e);
   var t = [];
   for (var r in Object(e))
     Gr.call(e, r) && r != "constructor" && t.push(r);
   return t;
 }
-var _r = A(c, "Map");
-const P = _r;
-function ke(e) {
-  return e == null ? "" : ge(e);
+var Yr = A(c, "Map");
+const V = Yr;
+function xe(e) {
+  return e == null ? "" : Se(e);
 }
-function Yr(e, t, r, i) {
-  var n = -1, s = e == null ? 0 : e.length;
-  for (i && s && (r = e[++n]); ++n < s; )
+function _r(e, t, r, i) {
+  var n = -1, l = e == null ? 0 : e.length;
+  for (i && l && (r = e[++n]); ++n < l; )
     r = t(r, e[n], n, e);
   return r;
 }
@@ -586,7 +586,7 @@ var Kr = {
 const Xr = Qr;
 var ei = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g, ti = "\\u0300-\\u036f", ri = "\\ufe20-\\ufe2f", ii = "\\u20d0-\\u20ff", ni = ti + ri + ii, oi = "[" + ni + "]", si = RegExp(oi, "g");
 function ai(e) {
-  return e = ke(e), e && e.replace(ei, Xr).replace(si, "");
+  return e = xe(e), e && e.replace(ei, Xr).replace(si, "");
 }
 var li = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
 function ui(e) {
@@ -596,74 +596,74 @@ var ci = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 function di(e) {
   return ci.test(e);
 }
-var xe = "\\ud800-\\udfff", hi = "\\u0300-\\u036f", fi = "\\ufe20-\\ufe2f", pi = "\\u20d0-\\u20ff", vi = hi + fi + pi, Ee = "\\u2700-\\u27bf", we = "a-z\\xdf-\\xf6\\xf8-\\xff", yi = "\\xac\\xb1\\xd7\\xf7", bi = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", mi = "\\u2000-\\u206f", gi = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", Fe = "A-Z\\xc0-\\xd6\\xd8-\\xde", ji = "\\ufe0e\\ufe0f", ze = yi + bi + mi + gi, Be = "['’]", re = "[" + ze + "]", $i = "[" + vi + "]", Ne = "\\d+", Si = "[" + Ee + "]", Ie = "[" + we + "]", Te = "[^" + xe + ze + Ne + Ee + we + Fe + "]", Ci = "\\ud83c[\\udffb-\\udfff]", Ai = "(?:" + $i + "|" + Ci + ")", Oi = "[^" + xe + "]", Le = "(?:\\ud83c[\\udde6-\\uddff]){2}", Ve = "[\\ud800-\\udbff][\\udc00-\\udfff]", b = "[" + Fe + "]", ki = "\\u200d", ie = "(?:" + Ie + "|" + Te + ")", xi = "(?:" + b + "|" + Te + ")", ne = "(?:" + Be + "(?:d|ll|m|re|s|t|ve))?", oe = "(?:" + Be + "(?:D|LL|M|RE|S|T|VE))?", Re = Ai + "?", De = "[" + ji + "]?", Ei = "(?:" + ki + "(?:" + [Oi, Le, Ve].join("|") + ")" + De + Re + ")*", wi = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", Fi = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", zi = De + Re + Ei, Bi = "(?:" + [Si, Le, Ve].join("|") + ")" + zi, Ni = RegExp([
-  b + "?" + Ie + "+" + ne + "(?=" + [re, b, "$"].join("|") + ")",
-  xi + "+" + oe + "(?=" + [re, b + ie, "$"].join("|") + ")",
-  b + "?" + ie + "+" + ne,
-  b + "+" + oe,
+var we = "\\ud800-\\udfff", hi = "\\u0300-\\u036f", fi = "\\ufe20-\\ufe2f", pi = "\\u20d0-\\u20ff", vi = hi + fi + pi, Fe = "\\u2700-\\u27bf", ze = "a-z\\xdf-\\xf6\\xf8-\\xff", yi = "\\xac\\xb1\\xd7\\xf7", bi = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", mi = "\\u2000-\\u206f", gi = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", Be = "A-Z\\xc0-\\xd6\\xd8-\\xde", ji = "\\ufe0e\\ufe0f", Ne = yi + bi + mi + gi, Ie = "['’]", ne = "[" + Ne + "]", Si = "[" + vi + "]", Te = "\\d+", $i = "[" + Fe + "]", Le = "[" + ze + "]", Re = "[^" + we + Ne + Te + Fe + ze + Be + "]", Ci = "\\ud83c[\\udffb-\\udfff]", Ai = "(?:" + Si + "|" + Ci + ")", Ei = "[^" + we + "]", De = "(?:\\ud83c[\\udde6-\\uddff]){2}", Me = "[\\ud800-\\udbff][\\udc00-\\udfff]", b = "[" + Be + "]", Oi = "\\u200d", oe = "(?:" + Le + "|" + Re + ")", ki = "(?:" + b + "|" + Re + ")", se = "(?:" + Ie + "(?:d|ll|m|re|s|t|ve))?", ae = "(?:" + Ie + "(?:D|LL|M|RE|S|T|VE))?", Pe = Ai + "?", Ve = "[" + ji + "]?", xi = "(?:" + Oi + "(?:" + [Ei, De, Me].join("|") + ")" + Ve + Pe + ")*", wi = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", Fi = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", zi = Ve + Pe + xi, Bi = "(?:" + [$i, De, Me].join("|") + ")" + zi, Ni = RegExp([
+  b + "?" + Le + "+" + se + "(?=" + [ne, b, "$"].join("|") + ")",
+  ki + "+" + ae + "(?=" + [ne, b + oe, "$"].join("|") + ")",
+  b + "?" + oe + "+" + se,
+  b + "+" + ae,
   Fi,
   wi,
-  Ne,
+  Te,
   Bi
 ].join("|"), "g");
 function Ii(e) {
   return e.match(Ni) || [];
 }
 function Ti(e, t, r) {
-  return e = ke(e), t = r ? void 0 : t, t === void 0 ? di(e) ? Ii(e) : ui(e) : e.match(t) || [];
+  return e = xe(e), t = r ? void 0 : t, t === void 0 ? di(e) ? Ii(e) : ui(e) : e.match(t) || [];
 }
-var Li = "['’]", Vi = RegExp(Li, "g");
-function Ri(e) {
+var Li = "['’]", Ri = RegExp(Li, "g");
+function Di(e) {
   return function(t) {
-    return Yr(Ti(ai(t).replace(Vi, "")), e, "");
+    return _r(Ti(ai(t).replace(Ri, "")), e, "");
   };
 }
-var Di = A(c, "DataView");
-const U = Di;
-var Mi = A(c, "Promise");
-const H = Mi;
-var Pi = A(c, "Set");
-const Z = Pi;
-var se = "[object Map]", Ui = "[object Object]", ae = "[object Promise]", le = "[object Set]", ue = "[object WeakMap]", ce = "[object DataView]", Hi = h(U), Zi = h(P), Wi = h(H), Gi = h(Z), qi = h(M), d = g;
-(U && d(new U(new ArrayBuffer(1))) != ce || P && d(new P()) != se || H && d(H.resolve()) != ae || Z && d(new Z()) != le || M && d(new M()) != ue) && (d = function(e) {
+var Mi = A(c, "DataView");
+const U = Mi;
+var Pi = A(c, "Promise");
+const H = Pi;
+var Vi = A(c, "Set");
+const Z = Vi;
+var le = "[object Map]", Ui = "[object Object]", ue = "[object Promise]", ce = "[object Set]", de = "[object WeakMap]", he = "[object DataView]", Hi = h(U), Zi = h(V), Wi = h(H), Gi = h(Z), qi = h(P), d = g;
+(U && d(new U(new ArrayBuffer(1))) != he || V && d(new V()) != le || H && d(H.resolve()) != ue || Z && d(new Z()) != ce || P && d(new P()) != de) && (d = function(e) {
   var t = g(e), r = t == Ui ? e.constructor : void 0, i = r ? h(r) : "";
   if (i)
     switch (i) {
       case Hi:
-        return ce;
+        return he;
       case Zi:
-        return se;
-      case Wi:
-        return ae;
-      case Gi:
         return le;
-      case qi:
+      case Wi:
         return ue;
+      case Gi:
+        return ce;
+      case qi:
+        return de;
     }
   return t;
 });
-const _i = d;
-var Yi = "[object Map]", Ji = "[object Set]", Ki = Object.prototype, Qi = Ki.hasOwnProperty;
-function de(e) {
+const Yi = d;
+var _i = "[object Map]", Ji = "[object Set]", Ki = Object.prototype, Qi = Ki.hasOwnProperty;
+function fe(e) {
   if (e == null)
     return !0;
-  if (er(e) && (me(e) || typeof e == "string" || typeof e.splice == "function" || dr(e) || Pr(e) || sr(e)))
+  if (er(e) && (je(e) || typeof e == "string" || typeof e.splice == "function" || dr(e) || Vr(e) || sr(e)))
     return !e.length;
-  var t = _i(e);
-  if (t == Yi || t == Ji)
+  var t = Yi(e);
+  if (t == _i || t == Ji)
     return !e.size;
-  if (Se(e))
+  if (Ae(e))
     return !qr(e).length;
   for (var r in e)
     if (Qi.call(e, r))
       return !1;
   return !0;
 }
-var Xi = Ri(function(e, t, r) {
+var Xi = Di(function(e, t, r) {
   return e + (r ? "-" : "") + t.toLowerCase();
 });
 const F = Xi;
-function he(e, t, r = "-") {
+function pe(e, t, r = "-") {
   const i = String(t).replace(new RegExp(`^${e}${r}?`), "");
   return [
     F(i),
@@ -673,21 +673,12 @@ function he(e, t, r = "-") {
 const en = C({
   directives: {
     bindEvents(e, t) {
-      var r;
-      for (const i of (r = t.instance) == null ? void 0 : r.$options.emits)
-        e.addEventListener(i, (n) => {
-          var s;
-          (s = t.instance) == null || s.$emit(i, n);
-        });
-      e.addEventListener("focus", () => {
-        t.instance.isDirty = !0, t.instance.hasFocus = !0;
-      }), e.addEventListener("blur", () => {
-        t.instance.hasFocus = !1;
-      });
+      var r, i;
+      (i = (r = t.instance) == null ? void 0 : r.bindEvents) == null || i.call(r, e);
     }
   },
   mixins: [
-    ve
+    be
   ],
   inheritAttrs: !1,
   props: {
@@ -703,7 +694,7 @@ const en = C({
      */
     animated: {
       type: Boolean,
-      default: () => l("animated", !1)
+      default: () => a("animated", !1)
     },
     /**
      * Additional classes assigned to the control element. These do not
@@ -744,7 +735,14 @@ const en = C({
      */
     formControlClass: {
       type: [Array, Object, String],
-      default: () => l("controlClass", "form-control")
+      default: () => a("controlClass", "form-control")
+    },
+    /**
+     * Add form-group wrapper to input.
+     */
+    group: {
+      type: Boolean,
+      default: () => a("group", !0)
     },
     /**
      * Some instructions to appear under the field label.
@@ -758,7 +756,7 @@ const en = C({
      */
     indicator: {
       type: [Object, String, Boolean],
-      default: () => l("indicator", "spinner")
+      default: () => a("indicator", "spinner")
     },
     /**
      * The activity indicator size.
@@ -783,7 +781,7 @@ const en = C({
      */
     labelClass: {
       type: [Object, String],
-      default: () => l("labelClass", "form-label")
+      default: () => a("labelClass", "form-label")
     },
     /**
      * The model default value.
@@ -822,16 +820,24 @@ const en = C({
   ],
   data() {
     return {
-      currentValue: this.modelValue,
+      // currentValue: this.modelValue,
       hasChanged: !1,
       hasFocus: !1,
       isDirty: !1,
-      isEmpty: de(this.modelValue)
+      isEmpty: fe(this.modelValue)
     };
   },
   computed: {
+    model: {
+      get() {
+        return this.modelValue;
+      },
+      set(e) {
+        this.hasChanged = !0, this.isEmpty = fe(e), this.$emit("update:modelValue", e);
+      }
+    },
     id() {
-      return this.$attrs.id || this.$attrs.name || Math.random().toString(36).slice(2);
+      return this.$attrs.id || Math.random().toString(36).slice(2);
     },
     componentName() {
       return this.$options.name;
@@ -839,6 +845,7 @@ const en = C({
     formGroupClasses() {
       return Object.assign({
         animated: this.animated,
+        "form-group": this.group,
         "has-activity": this.activity,
         "has-changed": this.hasChanged,
         "has-focus": this.hasFocus,
@@ -848,7 +855,7 @@ const en = C({
         "is-invalid": !!(this.invalid || this.invalidFeedback),
         "is-valid": !!(this.valid || this.validFeedback),
         [this.$attrs.class]: !!this.$attrs.class,
-        [this.size && he(this.size, this.componentName)]: !!this.size
+        [this.size && pe(this.size, this.componentName)]: !!this.size
       }, !!this.componentName && {
         [F(this.componentName)]: !0
       });
@@ -872,7 +879,7 @@ const en = C({
       }, this.shadowableClass);
     },
     controlSizeClass() {
-      return he(this.size, this.formControlClass);
+      return pe(this.size, this.formControlClass);
     },
     invalidFeedback() {
       if (this.error === "")
@@ -889,12 +896,25 @@ const en = C({
       return "form-control-plaintext";
     }
   },
-  watch: {
-    currentValue(e) {
-      this.hasChanged = !0, this.isEmpty = de(e), this.$emit("update:modelValue", e);
-    }
-  },
+  // watch: {
+  //     currentValue(value) {
+  //         this.hasChanged = true;
+  //         this.isEmpty = isEmpty(value);
+  //         this.$emit('update:modelValue', this.value);
+  //     }
+  // },
   methods: {
+    bindEvents(e) {
+      for (const t of this.$options.emits)
+        e.addEventListener(t, (r) => {
+          this.$emit(t, r);
+        });
+      e.addEventListener("focus", () => {
+        this.isDirty = !0, this.hasFocus = !0;
+      }), e.addEventListener("blur", () => {
+        this.hasFocus = !1;
+      });
+    },
     blur() {
       var e;
       (e = this.$refs.field) == null || e.blur();
@@ -916,7 +936,7 @@ function L(e, t, r = "-") {
     e
   ].filter((n) => !!n).join(r);
 }
-function fe(e) {
+function ve(e) {
   return !Array.isArray(e) && typeof e == "object";
 }
 C({
@@ -929,7 +949,7 @@ C({
     }
   },
   mixins: [
-    ve
+    be
   ],
   inheritAttrs: !1,
   props: {
@@ -948,7 +968,7 @@ C({
      */
     animated: {
       type: Boolean,
-      default: () => l("animated", !1)
+      default: () => a("animated", !1)
     },
     /**
      * An array of event names that correlate with callback functions.
@@ -964,7 +984,7 @@ C({
      */
     defaultControlClass: {
       type: String,
-      default: () => l("defaultControlClass", "form-control")
+      default: () => a("defaultControlClass", "form-control")
     },
     /**
      * An inline field validation error.
@@ -997,7 +1017,7 @@ C({
      */
     group: {
       type: Boolean,
-      default: () => l("group", !0)
+      default: () => a("group", !0)
     },
     /**
      * Some instructions to appear under the field label.
@@ -1015,7 +1035,7 @@ C({
      */
     indicator: {
       type: [String, Boolean],
-      default: () => l("indicator", "spinner")
+      default: () => a("indicator", "spinner")
     },
     /**
      * The activity indicator size.
@@ -1044,7 +1064,7 @@ C({
      */
     labelClass: {
       type: [Object, String],
-      default: () => l("labelClass", "form-label")
+      default: () => a("labelClass", "form-label")
     },
     /**
      * Should the control look like a pill.
@@ -1189,8 +1209,8 @@ C({
         e.tagName === "SELECT" ? "change" : "input",
         () => t(e.value)
       ), this.nativeEvents.forEach((n) => {
-        e.addEventListener(n, (s) => {
-          this.$emit(n, s);
+        e.addEventListener(n, (l) => {
+          this.$emit(n, l);
         });
       });
     },
@@ -1207,7 +1227,7 @@ C({
     },
     getFieldErrors() {
       let e = this.error || this.errors;
-      return this.errors && fe(this.errors) && (e = this.errors[this.$attrs.name || this.$attrs.id]), !e || Array.isArray(e) || fe(e) ? e : [e];
+      return this.errors && ve(this.errors) && (e = this.errors[this.$attrs.name || this.$attrs.id]), !e || Array.isArray(e) || ve(e) ? e : [e];
     },
     shouldChangeOnFocus() {
       return !this.getInputField().readOnly;
@@ -1230,40 +1250,40 @@ const rn = (e, t) => {
     r[i] = n;
   return r;
 }, nn = ["for"], on = { class: "form-group-inner" }, sn = ["innerHTML"], an = ["innerHTML"];
-function ln(e, t, r, i, n, s) {
-  const O = We("activity-indicator"), z = Ge("bind-events");
-  return a(), u("div", {
-    class: V(["input-field form-group", e.formGroupClasses])
+function ln(e, t, r, i, n, l) {
+  const E = qe("activity-indicator"), z = Ye("bind-events");
+  return s(), u("div", {
+    class: R(["input-field", e.formGroupClasses])
   }, [
     p(e.$slots, "label", {}, () => [
-      e.label ? (a(), u("label", {
+      e.label ? (s(), u("label", {
         key: 0,
         ref: "label",
-        class: V(e.labelClass),
+        class: R(e.labelClass),
         for: e.id
-      }, D(e.label), 11, nn)) : y("", !0)
+      }, M(e.label), 11, nn)) : y("", !0)
     ]),
-    R("div", on, [
-      p(e.$slots, "control", {}, () => [
-        e.$slots.icon ? (a(), u("div", {
+    D("div", on, [
+      p(e.$slots, "control", G(q({ bindEvents: e.bindEvents, controlAttributes: e.controlAttributes })), () => [
+        e.$slots.icon ? (s(), u("div", {
           key: 0,
           class: "form-group-inner-icon",
           onClick: t[0] || (t[0] = (...f) => e.focus && e.focus(...f))
         }, [
           p(e.$slots, "icon")
         ])) : y("", !0),
-        qe(R("input", _e({
+        _e(D("input", Je({
           ref: "field",
-          "onUpdate:modelValue": t[1] || (t[1] = (f) => e.currentValue = f)
+          "onUpdate:modelValue": t[1] || (t[1] = (f) => e.model = f)
         }, e.controlAttributes), null, 16), [
-          [Ye, e.currentValue],
+          [Ke, e.model],
           [z]
         ])
       ]),
       p(e.$slots, "activity", {}, () => [
-        Je(Ke, { name: "input-field-fade" }, {
-          default: Qe(() => [
-            e.activity ? (a(), pe(O, {
+        Qe(Xe, { name: "input-field-fade" }, {
+          default: et(() => [
+            e.activity ? (s(), ye(E, {
               key: "activity",
               ref: "activity",
               type: e.indicator,
@@ -1274,13 +1294,13 @@ function ln(e, t, r, i, n, s) {
         })
       ])
     ]),
-    p(e.$slots, "feedback", Xe(et({ invalid: e.invalid, invalidFeedback: e.invalidFeedback, valid: e.valid, validFeedback: e.validFeedback })), () => [
-      e.invalidFeedback ? (a(), u("div", {
+    p(e.$slots, "feedback", G(q({ invalid: e.invalid, invalidFeedback: e.invalidFeedback, valid: e.valid, validFeedback: e.validFeedback })), () => [
+      e.invalidFeedback ? (s(), u("div", {
         key: 0,
         class: "invalid-feedback",
         invalid: "",
         innerHTML: e.invalidFeedback
-      }, null, 8, sn)) : e.validFeedback ? (a(), u("div", {
+      }, null, 8, sn)) : e.validFeedback ? (s(), u("div", {
         key: 1,
         class: "valid-feedback",
         valid: "",
@@ -1288,10 +1308,10 @@ function ln(e, t, r, i, n, s) {
       }, null, 8, an)) : y("", !0)
     ]),
     p(e.$slots, "help", {}, () => [
-      e.helpText ? (a(), u("small", {
+      e.helpText ? (s(), u("small", {
         key: 0,
         ref: "help"
-      }, D(e.helpText), 513)) : y("", !0)
+      }, M(e.helpText), 513)) : y("", !0)
     ])
   ], 2);
 }

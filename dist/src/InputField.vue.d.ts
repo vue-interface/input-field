@@ -27,6 +27,10 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         type: (StringConstructor | ObjectConstructor | ArrayConstructor)[];
         default: () => any;
     };
+    group: {
+        type: BooleanConstructor;
+        default: () => any;
+    };
     helpText: {
         type: (StringConstructor | NumberConstructor)[];
         default: undefined;
@@ -59,17 +63,21 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
     };
     valid: BooleanConstructor;
 }, unknown, {
-    currentValue: string | number | unknown[] | Record<string, any> | undefined;
     hasChanged: boolean;
     hasFocus: boolean;
     isDirty: boolean;
     isEmpty: boolean;
 }, {
+    model: {
+        get(): any;
+        set(value: any): void;
+    };
     id(): string | undefined;
     componentName(): any;
     formGroupClasses(): {
         [x: number]: boolean;
         animated: any;
+        'form-group': any;
         'has-activity': any;
         'has-changed': any;
         'has-focus': any;
@@ -88,6 +96,7 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
     validFeedback(): any;
     plaintextClass(): "form-control-plaintext";
 }, {
+    bindEvents(el: HTMLElement): void;
     blur(): void;
     focus(): void;
     getFieldErrors(): any;
@@ -163,6 +172,10 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         type: (StringConstructor | ObjectConstructor | ArrayConstructor)[];
         default: () => any;
     };
+    group: {
+        type: BooleanConstructor;
+        default: () => any;
+    };
     helpText: {
         type: (StringConstructor | NumberConstructor)[];
         default: undefined;
@@ -213,6 +226,7 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
     errors: boolean | unknown[] | Record<string, any>;
     feedback: string | unknown[];
     formControlClass: string | unknown[] | Record<string, any>;
+    group: boolean;
     helpText: string | number;
     indicator: string | boolean | Record<string, any>;
     indicatorSize: string;
