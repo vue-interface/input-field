@@ -1,15 +1,184 @@
-import { defineComponent as S, resolveComponent as Be, resolveDirective as Ie, openBlock as u, createElementBlock as f, normalizeClass as N, renderSlot as h, toDisplayString as L, createCommentVNode as y, createElementVNode as V, withDirectives as Te, mergeProps as Ne, vModelDynamic as Le, createVNode as Ve, Transition as De, withCtx as Me, createBlock as Pe, normalizeProps as Ue, guardReactiveProps as Re } from "vue";
-const m = {};
-function s(...e) {
-  if (!e.length)
-    return m;
-  const [t, r] = e;
-  return typeof t == "string" ? typeof m[t] < "u" ? m[t] : r : Array.isArray(t) ? t.reduce((i, o) => Object.assign(i, {
-    //@ts-ignore
-    [o]: m[o]
-  }), {}) : Object.assign(m, ...e);
+import { defineComponent as C, inject as Pe, toRaw as Ue, openBlock as a, createElementBlock as u, normalizeClass as V, normalizeStyle as He, createElementVNode as R, createBlock as pe, resolveDynamicComponent as Ze, toDisplayString as D, createCommentVNode as y, resolveComponent as We, resolveDirective as Ge, renderSlot as p, withDirectives as qe, mergeProps as _e, vModelDynamic as Ye, createVNode as Je, Transition as Ke, withCtx as Qe, normalizeProps as Xe, guardReactiveProps as et } from "vue";
+var tt = Object.defineProperty, rt = (e, t, r) => t in e ? tt(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, it = (e, t, r) => (rt(e, typeof t != "symbol" ? t + "" : t, r), r), E = function() {
+  return E = Object.assign || function(e) {
+    for (var t, r = 1, i = arguments.length; r < i; r++) {
+      t = arguments[r];
+      for (var n in t)
+        Object.prototype.hasOwnProperty.call(t, n) && (e[n] = t[n]);
+    }
+    return e;
+  }, E.apply(this, arguments);
+};
+function nt(e) {
+  return e.toLowerCase();
 }
-const oe = S({
+var ot = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g], st = /[^A-Z0-9]+/gi;
+function at(e, t) {
+  t === void 0 && (t = {});
+  for (var r = t.splitRegexp, i = r === void 0 ? ot : r, n = t.stripRegexp, s = n === void 0 ? st : n, O = t.transform, z = O === void 0 ? nt : O, f = t.delimiter, Me = f === void 0 ? " " : f, k = G(G(e, i, "$1\0$2"), s, "\0"), B = 0, N = k.length; k.charAt(B) === "\0"; )
+    B++;
+  for (; k.charAt(N - 1) === "\0"; )
+    N--;
+  return k.slice(B, N).split("\0").map(z).join(Me);
+}
+function G(e, t, r) {
+  return t instanceof RegExp ? e.replace(t, r) : t.reduce(function(i, n) {
+    return i.replace(n, r);
+  }, e);
+}
+function lt(e, t) {
+  return t === void 0 && (t = {}), at(e, E({ delimiter: "." }, t));
+}
+function x(e, t) {
+  return t === void 0 && (t = {}), lt(e, E({ delimiter: "-" }, t));
+}
+let ut = class {
+  constructor(t = {}) {
+    it(this, "components"), this.components = /* @__PURE__ */ new Map(), Object.entries(t).forEach(([r, i]) => {
+      this.register(r, i);
+    });
+  }
+  get(t) {
+    const r = this.components.get(
+      t = x(t)
+    );
+    if (r)
+      return r;
+    throw new Error(`"${t}" has not been registered yet!`);
+  }
+  register(t, r) {
+    return typeof t == "object" ? (Object.entries(t).forEach(([i, n]) => {
+      this.register(x(i), n);
+    }), this) : (this.components.set(x(t), r), this);
+  }
+  remove(t) {
+    return this.components.delete(x(t)), this;
+  }
+  reset() {
+    return this.components = /* @__PURE__ */ new Map(), this;
+  }
+};
+function ct(e = {}) {
+  return new ut(e);
+}
+const dt = ct();
+function v(e, t = "px") {
+  return e != null && e !== !1 && isFinite(e) ? `${e}${t}` : e;
+}
+const ht = C({
+  props: {
+    absolute: Boolean,
+    center: Boolean,
+    label: {
+      type: String,
+      default: void 0
+    },
+    size: {
+      type: String,
+      default: "md"
+    },
+    registry: {
+      type: String,
+      default: "indicators"
+    },
+    type: {
+      type: [Object, String],
+      required: !0
+    },
+    height: {
+      type: [String, Number],
+      default: void 0
+    },
+    maxHeight: {
+      type: [String, Number],
+      default: void 0
+    },
+    minHeight: {
+      type: [String, Number],
+      default: void 0
+    },
+    width: {
+      type: [String, Number],
+      default: void 0
+    },
+    maxWidth: {
+      type: [String, Number],
+      default: void 0
+    },
+    minWidth: {
+      type: [String, Number],
+      default: void 0
+    }
+  },
+  data: () => ({
+    is: null
+  }),
+  computed: {
+    classes() {
+      return {
+        "activity-indicator-center": this.center,
+        "activity-indicator-absolute": this.absolute,
+        [this.size && `activity-indicator-${this.size}`]: !!this.size
+      };
+    },
+    style() {
+      return {
+        width: v(this.width),
+        maxWidth: v(this.maxWidth),
+        minWidth: v(this.minWidth),
+        height: v(this.height),
+        maxHeight: v(this.maxHeight),
+        minHeight: v(this.minHeight)
+      };
+    }
+  },
+  // async mounted() {
+  //     const component = await this.component();
+  //     this.is = () => component;
+  // },
+  methods: {
+    componentFromRegistry(e) {
+      var t;
+      try {
+        return (t = Pe(this.registry || "indicators", dt)) == null ? void 0 : t.get(e);
+      } catch {
+      }
+    },
+    component() {
+      return typeof this.type == "string" ? this.componentFromRegistry(this.type) : Ue(this.type);
+    }
+  }
+}), ft = (e, t) => {
+  const r = e.__vccOpts || e;
+  for (const [i, n] of t)
+    r[i] = n;
+  return r;
+}, pt = { class: "activity-indicator-content" }, vt = {
+  key: 0,
+  class: "activity-indicator-label"
+};
+function yt(e, t, r, i, n, s) {
+  return a(), u("div", {
+    class: V(["activity-indicator", e.classes]),
+    style: He(e.style)
+  }, [
+    R("div", pt, [
+      (a(), pe(Ze(e.component()), { class: "mx-auto" })),
+      e.label ? (a(), u("div", vt, D(e.label), 1)) : y("", !0)
+    ])
+  ], 6);
+}
+const bt = /* @__PURE__ */ ft(ht, [["render", yt]]), j = {};
+function l(...e) {
+  if (!e.length)
+    return j;
+  const [t, r] = e;
+  return typeof t == "string" ? typeof j[t] < "u" ? j[t] : r : Array.isArray(t) ? t.reduce((i, n) => Object.assign(i, {
+    //@ts-ignore
+    [n]: j[n]
+  }), {}) : Object.assign(j, ...e);
+}
+const ve = C({
   props: {
     dropShadow: {
       type: [Boolean, String],
@@ -38,81 +207,81 @@ const oe = S({
     }
   }
 });
-var Ze = typeof global == "object" && global && global.Object === Object && global;
-const se = Ze;
-var Ge = typeof self == "object" && self && self.Object === Object && self, He = se || Ge || Function("return this")();
-const l = He;
-var _e = l.Symbol;
-const v = _e;
-var ae = Object.prototype, qe = ae.hasOwnProperty, We = ae.toString, g = v ? v.toStringTag : void 0;
-function Ye(e) {
-  var t = qe.call(e, g), r = e[g];
+var mt = typeof global == "object" && global && global.Object === Object && global;
+const ye = mt;
+var gt = typeof self == "object" && self && self.Object === Object && self, jt = ye || gt || Function("return this")();
+const c = jt;
+var $t = c.Symbol;
+const m = $t;
+var be = Object.prototype, St = be.hasOwnProperty, Ct = be.toString, $ = m ? m.toStringTag : void 0;
+function At(e) {
+  var t = St.call(e, $), r = e[$];
   try {
-    e[g] = void 0;
+    e[$] = void 0;
     var i = !0;
   } catch {
   }
-  var o = We.call(e);
-  return i && (t ? e[g] = r : delete e[g]), o;
+  var n = Ct.call(e);
+  return i && (t ? e[$] = r : delete e[$]), n;
 }
-var Je = Object.prototype, Ke = Je.toString;
-function Qe(e) {
-  return Ke.call(e);
+var Ot = Object.prototype, kt = Ot.toString;
+function xt(e) {
+  return kt.call(e);
 }
-var Xe = "[object Null]", et = "[object Undefined]", D = v ? v.toStringTag : void 0;
-function b(e) {
-  return e == null ? e === void 0 ? et : Xe : D && D in Object(e) ? Ye(e) : Qe(e);
+var Et = "[object Null]", wt = "[object Undefined]", q = m ? m.toStringTag : void 0;
+function g(e) {
+  return e == null ? e === void 0 ? wt : Et : q && q in Object(e) ? At(e) : xt(e);
 }
-function A(e) {
+function w(e) {
   return e != null && typeof e == "object";
 }
-var tt = "[object Symbol]";
-function rt(e) {
-  return typeof e == "symbol" || A(e) && b(e) == tt;
+var Ft = "[object Symbol]";
+function zt(e) {
+  return typeof e == "symbol" || w(e) && g(e) == Ft;
 }
-function it(e, t) {
-  for (var r = -1, i = e == null ? 0 : e.length, o = Array(i); ++r < i; )
-    o[r] = t(e[r], r, e);
-  return o;
+function Bt(e, t) {
+  for (var r = -1, i = e == null ? 0 : e.length, n = Array(i); ++r < i; )
+    n[r] = t(e[r], r, e);
+  return n;
 }
-var nt = Array.isArray;
-const le = nt;
-var ot = 1 / 0, M = v ? v.prototype : void 0, P = M ? M.toString : void 0;
-function ue(e) {
+var Nt = Array.isArray;
+const me = Nt;
+var It = 1 / 0, _ = m ? m.prototype : void 0, Y = _ ? _.toString : void 0;
+function ge(e) {
   if (typeof e == "string")
     return e;
-  if (le(e))
-    return it(e, ue) + "";
-  if (rt(e))
-    return P ? P.call(e) : "";
+  if (me(e))
+    return Bt(e, ge) + "";
+  if (zt(e))
+    return Y ? Y.call(e) : "";
   var t = e + "";
-  return t == "0" && 1 / e == -ot ? "-0" : t;
+  return t == "0" && 1 / e == -It ? "-0" : t;
 }
-function T(e) {
+function W(e) {
   var t = typeof e;
   return e != null && (t == "object" || t == "function");
 }
-var st = "[object AsyncFunction]", at = "[object Function]", lt = "[object GeneratorFunction]", ut = "[object Proxy]";
-function ce(e) {
-  if (!T(e))
+var Tt = "[object AsyncFunction]", Lt = "[object Function]", Vt = "[object GeneratorFunction]", Rt = "[object Proxy]";
+function je(e) {
+  if (!W(e))
     return !1;
-  var t = b(e);
-  return t == at || t == lt || t == st || t == ut;
+  var t = g(e);
+  return t == Lt || t == Vt || t == Tt || t == Rt;
 }
-var ct = l["__core-js_shared__"];
-const E = ct;
-var U = function() {
-  var e = /[^.]+$/.exec(E && E.keys && E.keys.IE_PROTO || "");
+var Dt = c["__core-js_shared__"];
+const I = Dt;
+var J = function() {
+  var e = /[^.]+$/.exec(I && I.keys && I.keys.IE_PROTO || "");
   return e ? "Symbol(src)_1." + e : "";
 }();
-function dt(e) {
-  return !!U && U in e;
+function Mt(e) {
+  return !!J && J in e;
 }
-var ft = Function.prototype, ht = ft.toString;
-function d(e) {
+var Pt = Function.prototype, Ut = Pt.toString;
+function h(e) {
   if (e != null) {
     try {
-      return ht.call(e);
+      return Ut.call(e);
     } catch {
     }
     try {
@@ -122,105 +291,105 @@ function d(e) {
   }
   return "";
 }
-var pt = /[\\^$.*+?()[\]{}|]/g, vt = /^\[object .+?Constructor\]$/, bt = Function.prototype, yt = Object.prototype, mt = bt.toString, gt = yt.hasOwnProperty, jt = RegExp(
-  "^" + mt.call(gt).replace(pt, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
+var Ht = /[\\^$.*+?()[\]{}|]/g, Zt = /^\[object .+?Constructor\]$/, Wt = Function.prototype, Gt = Object.prototype, qt = Wt.toString, _t = Gt.hasOwnProperty, Yt = RegExp(
+  "^" + qt.call(_t).replace(Ht, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
 );
-function Ct(e) {
-  if (!T(e) || dt(e))
+function Jt(e) {
+  if (!W(e) || Mt(e))
     return !1;
-  var t = ce(e) ? jt : vt;
-  return t.test(d(e));
+  var t = je(e) ? Yt : Zt;
+  return t.test(h(e));
 }
-function St(e, t) {
+function Kt(e, t) {
   return e == null ? void 0 : e[t];
 }
-function C(e, t) {
-  var r = St(e, t);
-  return Ct(r) ? r : void 0;
+function A(e, t) {
+  var r = Kt(e, t);
+  return Jt(r) ? r : void 0;
 }
-var At = C(l, "WeakMap");
-const x = At;
-var kt = 9007199254740991;
-function de(e) {
-  return typeof e == "number" && e > -1 && e % 1 == 0 && e <= kt;
+var Qt = A(c, "WeakMap");
+const M = Qt;
+var Xt = 9007199254740991;
+function $e(e) {
+  return typeof e == "number" && e > -1 && e % 1 == 0 && e <= Xt;
 }
-function $t(e) {
-  return e != null && de(e.length) && !ce(e);
+function er(e) {
+  return e != null && $e(e.length) && !je(e);
 }
-var Et = Object.prototype;
-function fe(e) {
-  var t = e && e.constructor, r = typeof t == "function" && t.prototype || Et;
+var tr = Object.prototype;
+function Se(e) {
+  var t = e && e.constructor, r = typeof t == "function" && t.prototype || tr;
   return e === r;
 }
-var Ot = "[object Arguments]";
-function R(e) {
-  return A(e) && b(e) == Ot;
+var rr = "[object Arguments]";
+function K(e) {
+  return w(e) && g(e) == rr;
 }
-var he = Object.prototype, Ft = he.hasOwnProperty, xt = he.propertyIsEnumerable, wt = R(function() {
+var Ce = Object.prototype, ir = Ce.hasOwnProperty, nr = Ce.propertyIsEnumerable, or = K(function() {
   return arguments;
-}()) ? R : function(e) {
-  return A(e) && Ft.call(e, "callee") && !xt.call(e, "callee");
+}()) ? K : function(e) {
+  return w(e) && ir.call(e, "callee") && !nr.call(e, "callee");
 };
-const zt = wt;
-function Bt() {
+const sr = or;
+function ar() {
   return !1;
 }
-var pe = typeof exports == "object" && exports && !exports.nodeType && exports, Z = pe && typeof module == "object" && module && !module.nodeType && module, It = Z && Z.exports === pe, G = It ? l.Buffer : void 0, Tt = G ? G.isBuffer : void 0, Nt = Tt || Bt;
-const Lt = Nt;
-var Vt = "[object Arguments]", Dt = "[object Array]", Mt = "[object Boolean]", Pt = "[object Date]", Ut = "[object Error]", Rt = "[object Function]", Zt = "[object Map]", Gt = "[object Number]", Ht = "[object Object]", _t = "[object RegExp]", qt = "[object Set]", Wt = "[object String]", Yt = "[object WeakMap]", Jt = "[object ArrayBuffer]", Kt = "[object DataView]", Qt = "[object Float32Array]", Xt = "[object Float64Array]", er = "[object Int8Array]", tr = "[object Int16Array]", rr = "[object Int32Array]", ir = "[object Uint8Array]", nr = "[object Uint8ClampedArray]", or = "[object Uint16Array]", sr = "[object Uint32Array]", n = {};
-n[Qt] = n[Xt] = n[er] = n[tr] = n[rr] = n[ir] = n[nr] = n[or] = n[sr] = !0;
-n[Vt] = n[Dt] = n[Jt] = n[Mt] = n[Kt] = n[Pt] = n[Ut] = n[Rt] = n[Zt] = n[Gt] = n[Ht] = n[_t] = n[qt] = n[Wt] = n[Yt] = !1;
-function ar(e) {
-  return A(e) && de(e.length) && !!n[b(e)];
+var Ae = typeof exports == "object" && exports && !exports.nodeType && exports, Q = Ae && typeof module == "object" && module && !module.nodeType && module, lr = Q && Q.exports === Ae, X = lr ? c.Buffer : void 0, ur = X ? X.isBuffer : void 0, cr = ur || ar;
+const dr = cr;
+var hr = "[object Arguments]", fr = "[object Array]", pr = "[object Boolean]", vr = "[object Date]", yr = "[object Error]", br = "[object Function]", mr = "[object Map]", gr = "[object Number]", jr = "[object Object]", $r = "[object RegExp]", Sr = "[object Set]", Cr = "[object String]", Ar = "[object WeakMap]", Or = "[object ArrayBuffer]", kr = "[object DataView]", xr = "[object Float32Array]", Er = "[object Float64Array]", wr = "[object Int8Array]", Fr = "[object Int16Array]", zr = "[object Int32Array]", Br = "[object Uint8Array]", Nr = "[object Uint8ClampedArray]", Ir = "[object Uint16Array]", Tr = "[object Uint32Array]", o = {};
+o[xr] = o[Er] = o[wr] = o[Fr] = o[zr] = o[Br] = o[Nr] = o[Ir] = o[Tr] = !0;
+o[hr] = o[fr] = o[Or] = o[pr] = o[kr] = o[vr] = o[yr] = o[br] = o[mr] = o[gr] = o[jr] = o[$r] = o[Sr] = o[Cr] = o[Ar] = !1;
+function Lr(e) {
+  return w(e) && $e(e.length) && !!o[g(e)];
 }
-function lr(e) {
+function Vr(e) {
   return function(t) {
     return e(t);
   };
 }
-var ve = typeof exports == "object" && exports && !exports.nodeType && exports, j = ve && typeof module == "object" && module && !module.nodeType && module, ur = j && j.exports === ve, O = ur && se.process, cr = function() {
+var Oe = typeof exports == "object" && exports && !exports.nodeType && exports, S = Oe && typeof module == "object" && module && !module.nodeType && module, Rr = S && S.exports === Oe, T = Rr && ye.process, Dr = function() {
   try {
-    var e = j && j.require && j.require("util").types;
-    return e || O && O.binding && O.binding("util");
+    var e = S && S.require && S.require("util").types;
+    return e || T && T.binding && T.binding("util");
   } catch {
   }
 }();
-const H = cr;
-var _ = H && H.isTypedArray, dr = _ ? lr(_) : ar;
-const fr = dr;
-function hr(e, t) {
+const ee = Dr;
+var te = ee && ee.isTypedArray, Mr = te ? Vr(te) : Lr;
+const Pr = Mr;
+function Ur(e, t) {
   return function(r) {
     return e(t(r));
   };
 }
-var pr = hr(Object.keys, Object);
-const vr = pr;
-var br = Object.prototype, yr = br.hasOwnProperty;
-function mr(e) {
-  if (!fe(e))
-    return vr(e);
+var Hr = Ur(Object.keys, Object);
+const Zr = Hr;
+var Wr = Object.prototype, Gr = Wr.hasOwnProperty;
+function qr(e) {
+  if (!Se(e))
+    return Zr(e);
   var t = [];
   for (var r in Object(e))
-    yr.call(e, r) && r != "constructor" && t.push(r);
+    Gr.call(e, r) && r != "constructor" && t.push(r);
   return t;
 }
-var gr = C(l, "Map");
-const w = gr;
-function be(e) {
-  return e == null ? "" : ue(e);
+var _r = A(c, "Map");
+const P = _r;
+function ke(e) {
+  return e == null ? "" : ge(e);
 }
-function jr(e, t, r, i) {
-  var o = -1, a = e == null ? 0 : e.length;
-  for (i && a && (r = e[++o]); ++o < a; )
-    r = t(r, e[o], o, e);
+function Yr(e, t, r, i) {
+  var n = -1, s = e == null ? 0 : e.length;
+  for (i && s && (r = e[++n]); ++n < s; )
+    r = t(r, e[n], n, e);
   return r;
 }
-function Cr(e) {
+function Jr(e) {
   return function(t) {
     return e == null ? void 0 : e[t];
   };
 }
-var Sr = {
+var Kr = {
   // Latin-1 Supplement block.
   À: "A",
   Á: "A",
@@ -413,102 +582,102 @@ var Sr = {
   œ: "oe",
   ŉ: "'n",
   ſ: "s"
-}, Ar = Cr(Sr);
-const kr = Ar;
-var $r = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g, Er = "\\u0300-\\u036f", Or = "\\ufe20-\\ufe2f", Fr = "\\u20d0-\\u20ff", xr = Er + Or + Fr, wr = "[" + xr + "]", zr = RegExp(wr, "g");
-function Br(e) {
-  return e = be(e), e && e.replace($r, kr).replace(zr, "");
+}, Qr = Jr(Kr);
+const Xr = Qr;
+var ei = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g, ti = "\\u0300-\\u036f", ri = "\\ufe20-\\ufe2f", ii = "\\u20d0-\\u20ff", ni = ti + ri + ii, oi = "[" + ni + "]", si = RegExp(oi, "g");
+function ai(e) {
+  return e = ke(e), e && e.replace(ei, Xr).replace(si, "");
 }
-var Ir = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
-function Tr(e) {
-  return e.match(Ir) || [];
-}
-var Nr = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
-function Lr(e) {
-  return Nr.test(e);
-}
-var ye = "\\ud800-\\udfff", Vr = "\\u0300-\\u036f", Dr = "\\ufe20-\\ufe2f", Mr = "\\u20d0-\\u20ff", Pr = Vr + Dr + Mr, me = "\\u2700-\\u27bf", ge = "a-z\\xdf-\\xf6\\xf8-\\xff", Ur = "\\xac\\xb1\\xd7\\xf7", Rr = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", Zr = "\\u2000-\\u206f", Gr = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", je = "A-Z\\xc0-\\xd6\\xd8-\\xde", Hr = "\\ufe0e\\ufe0f", Ce = Ur + Rr + Zr + Gr, Se = "['’]", q = "[" + Ce + "]", _r = "[" + Pr + "]", Ae = "\\d+", qr = "[" + me + "]", ke = "[" + ge + "]", $e = "[^" + ye + Ce + Ae + me + ge + je + "]", Wr = "\\ud83c[\\udffb-\\udfff]", Yr = "(?:" + _r + "|" + Wr + ")", Jr = "[^" + ye + "]", Ee = "(?:\\ud83c[\\udde6-\\uddff]){2}", Oe = "[\\ud800-\\udbff][\\udc00-\\udfff]", p = "[" + je + "]", Kr = "\\u200d", W = "(?:" + ke + "|" + $e + ")", Qr = "(?:" + p + "|" + $e + ")", Y = "(?:" + Se + "(?:d|ll|m|re|s|t|ve))?", J = "(?:" + Se + "(?:D|LL|M|RE|S|T|VE))?", Fe = Yr + "?", xe = "[" + Hr + "]?", Xr = "(?:" + Kr + "(?:" + [Jr, Ee, Oe].join("|") + ")" + xe + Fe + ")*", ei = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", ti = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", ri = xe + Fe + Xr, ii = "(?:" + [qr, Ee, Oe].join("|") + ")" + ri, ni = RegExp([
-  p + "?" + ke + "+" + Y + "(?=" + [q, p, "$"].join("|") + ")",
-  Qr + "+" + J + "(?=" + [q, p + W, "$"].join("|") + ")",
-  p + "?" + W + "+" + Y,
-  p + "+" + J,
-  ti,
-  ei,
-  Ae,
-  ii
-].join("|"), "g");
-function oi(e) {
-  return e.match(ni) || [];
-}
-function si(e, t, r) {
-  return e = be(e), t = r ? void 0 : t, t === void 0 ? Lr(e) ? oi(e) : Tr(e) : e.match(t) || [];
-}
-var ai = "['’]", li = RegExp(ai, "g");
+var li = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
 function ui(e) {
+  return e.match(li) || [];
+}
+var ci = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+function di(e) {
+  return ci.test(e);
+}
+var xe = "\\ud800-\\udfff", hi = "\\u0300-\\u036f", fi = "\\ufe20-\\ufe2f", pi = "\\u20d0-\\u20ff", vi = hi + fi + pi, Ee = "\\u2700-\\u27bf", we = "a-z\\xdf-\\xf6\\xf8-\\xff", yi = "\\xac\\xb1\\xd7\\xf7", bi = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", mi = "\\u2000-\\u206f", gi = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", Fe = "A-Z\\xc0-\\xd6\\xd8-\\xde", ji = "\\ufe0e\\ufe0f", ze = yi + bi + mi + gi, Be = "['’]", re = "[" + ze + "]", $i = "[" + vi + "]", Ne = "\\d+", Si = "[" + Ee + "]", Ie = "[" + we + "]", Te = "[^" + xe + ze + Ne + Ee + we + Fe + "]", Ci = "\\ud83c[\\udffb-\\udfff]", Ai = "(?:" + $i + "|" + Ci + ")", Oi = "[^" + xe + "]", Le = "(?:\\ud83c[\\udde6-\\uddff]){2}", Ve = "[\\ud800-\\udbff][\\udc00-\\udfff]", b = "[" + Fe + "]", ki = "\\u200d", ie = "(?:" + Ie + "|" + Te + ")", xi = "(?:" + b + "|" + Te + ")", ne = "(?:" + Be + "(?:d|ll|m|re|s|t|ve))?", oe = "(?:" + Be + "(?:D|LL|M|RE|S|T|VE))?", Re = Ai + "?", De = "[" + ji + "]?", Ei = "(?:" + ki + "(?:" + [Oi, Le, Ve].join("|") + ")" + De + Re + ")*", wi = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", Fi = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", zi = De + Re + Ei, Bi = "(?:" + [Si, Le, Ve].join("|") + ")" + zi, Ni = RegExp([
+  b + "?" + Ie + "+" + ne + "(?=" + [re, b, "$"].join("|") + ")",
+  xi + "+" + oe + "(?=" + [re, b + ie, "$"].join("|") + ")",
+  b + "?" + ie + "+" + ne,
+  b + "+" + oe,
+  Fi,
+  wi,
+  Ne,
+  Bi
+].join("|"), "g");
+function Ii(e) {
+  return e.match(Ni) || [];
+}
+function Ti(e, t, r) {
+  return e = ke(e), t = r ? void 0 : t, t === void 0 ? di(e) ? Ii(e) : ui(e) : e.match(t) || [];
+}
+var Li = "['’]", Vi = RegExp(Li, "g");
+function Ri(e) {
   return function(t) {
-    return jr(si(Br(t).replace(li, "")), e, "");
+    return Yr(Ti(ai(t).replace(Vi, "")), e, "");
   };
 }
-var ci = C(l, "DataView");
-const z = ci;
-var di = C(l, "Promise");
-const B = di;
-var fi = C(l, "Set");
-const I = fi;
-var K = "[object Map]", hi = "[object Object]", Q = "[object Promise]", X = "[object Set]", ee = "[object WeakMap]", te = "[object DataView]", pi = d(z), vi = d(w), bi = d(B), yi = d(I), mi = d(x), c = b;
-(z && c(new z(new ArrayBuffer(1))) != te || w && c(new w()) != K || B && c(B.resolve()) != Q || I && c(new I()) != X || x && c(new x()) != ee) && (c = function(e) {
-  var t = b(e), r = t == hi ? e.constructor : void 0, i = r ? d(r) : "";
+var Di = A(c, "DataView");
+const U = Di;
+var Mi = A(c, "Promise");
+const H = Mi;
+var Pi = A(c, "Set");
+const Z = Pi;
+var se = "[object Map]", Ui = "[object Object]", ae = "[object Promise]", le = "[object Set]", ue = "[object WeakMap]", ce = "[object DataView]", Hi = h(U), Zi = h(P), Wi = h(H), Gi = h(Z), qi = h(M), d = g;
+(U && d(new U(new ArrayBuffer(1))) != ce || P && d(new P()) != se || H && d(H.resolve()) != ae || Z && d(new Z()) != le || M && d(new M()) != ue) && (d = function(e) {
+  var t = g(e), r = t == Ui ? e.constructor : void 0, i = r ? h(r) : "";
   if (i)
     switch (i) {
-      case pi:
-        return te;
-      case vi:
-        return K;
-      case bi:
-        return Q;
-      case yi:
-        return X;
-      case mi:
-        return ee;
+      case Hi:
+        return ce;
+      case Zi:
+        return se;
+      case Wi:
+        return ae;
+      case Gi:
+        return le;
+      case qi:
+        return ue;
     }
   return t;
 });
-const gi = c;
-var ji = "[object Map]", Ci = "[object Set]", Si = Object.prototype, Ai = Si.hasOwnProperty;
-function re(e) {
+const _i = d;
+var Yi = "[object Map]", Ji = "[object Set]", Ki = Object.prototype, Qi = Ki.hasOwnProperty;
+function de(e) {
   if (e == null)
     return !0;
-  if ($t(e) && (le(e) || typeof e == "string" || typeof e.splice == "function" || Lt(e) || fr(e) || zt(e)))
+  if (er(e) && (me(e) || typeof e == "string" || typeof e.splice == "function" || dr(e) || Pr(e) || sr(e)))
     return !e.length;
-  var t = gi(e);
-  if (t == ji || t == Ci)
+  var t = _i(e);
+  if (t == Yi || t == Ji)
     return !e.size;
-  if (fe(e))
-    return !mr(e).length;
+  if (Se(e))
+    return !qr(e).length;
   for (var r in e)
-    if (Ai.call(e, r))
+    if (Qi.call(e, r))
       return !1;
   return !0;
 }
-var ki = ui(function(e, t, r) {
+var Xi = Ri(function(e, t, r) {
   return e + (r ? "-" : "") + t.toLowerCase();
 });
-const k = ki;
-function ie(e, t, r = "-") {
+const F = Xi;
+function he(e, t, r = "-") {
   const i = String(t).replace(new RegExp(`^${e}${r}?`), "");
   return [
-    k(i),
+    F(i),
     e
-  ].filter((o) => !!o).join(r);
+  ].filter((n) => !!n).join(r);
 }
-const $i = S({
+const en = C({
   directives: {
     bindEvents(e, t) {
       var r;
       for (const i of (r = t.instance) == null ? void 0 : r.$options.emits)
-        e.addEventListener(i, (o) => {
-          var a;
-          (a = t.instance) == null || a.$emit(i, o);
+        e.addEventListener(i, (n) => {
+          var s;
+          (s = t.instance) == null || s.$emit(i, n);
         });
       e.addEventListener("focus", () => {
         t.instance.isDirty = !0, t.instance.hasFocus = !0;
@@ -518,7 +687,7 @@ const $i = S({
     }
   },
   mixins: [
-    oe
+    ve
   ],
   inheritAttrs: !1,
   props: {
@@ -534,7 +703,7 @@ const $i = S({
      */
     animated: {
       type: Boolean,
-      default: () => s("animated", !1)
+      default: () => l("animated", !1)
     },
     /**
      * Additional classes assigned to the control element. These do not
@@ -575,7 +744,7 @@ const $i = S({
      */
     formControlClass: {
       type: [Array, Object, String],
-      default: () => s("controlClass", "form-control")
+      default: () => l("controlClass", "form-control")
     },
     /**
      * Some instructions to appear under the field label.
@@ -589,7 +758,7 @@ const $i = S({
      */
     indicator: {
       type: [Object, String, Boolean],
-      default: () => s("indicator", "spinner")
+      default: () => l("indicator", "spinner")
     },
     /**
      * The activity indicator size.
@@ -614,7 +783,7 @@ const $i = S({
      */
     labelClass: {
       type: [Object, String],
-      default: () => s("labelClass", "form-label")
+      default: () => l("labelClass", "form-label")
     },
     /**
      * The model default value.
@@ -657,7 +826,7 @@ const $i = S({
       hasChanged: !1,
       hasFocus: !1,
       isDirty: !1,
-      isEmpty: re(this.modelValue)
+      isEmpty: de(this.modelValue)
     };
   },
   computed: {
@@ -679,9 +848,9 @@ const $i = S({
         "is-invalid": !!(this.invalid || this.invalidFeedback),
         "is-valid": !!(this.valid || this.validFeedback),
         [this.$attrs.class]: !!this.$attrs.class,
-        [this.size && ie(this.size, this.componentName)]: !!this.size
+        [this.size && he(this.size, this.componentName)]: !!this.size
       }, !!this.componentName && {
-        [k(this.componentName)]: !0
+        [F(this.componentName)]: !0
       });
     },
     controlAttributes() {
@@ -703,7 +872,7 @@ const $i = S({
       }, this.shadowableClass);
     },
     controlSizeClass() {
-      return ie(this.size, this.formControlClass);
+      return he(this.size, this.formControlClass);
     },
     invalidFeedback() {
       if (this.error === "")
@@ -722,7 +891,7 @@ const $i = S({
   },
   watch: {
     currentValue(e) {
-      this.hasChanged = !0, this.isEmpty = re(e), this.$emit("update:modelValue", e);
+      this.hasChanged = !0, this.isEmpty = de(e), this.$emit("update:modelValue", e);
     }
   },
   methods: {
@@ -736,21 +905,21 @@ const $i = S({
     },
     getFieldErrors() {
       let e = this.error || this.errors;
-      return this.errors && !Array.isArray(this.errors) && (e = this.errors[this.$attrs.name || this.$attrs.id]), !e || Array.isArray(e) || T(e) ? e : [e];
+      return this.errors && !Array.isArray(this.errors) && (e = this.errors[this.$attrs.name || this.$attrs.id]), !e || Array.isArray(e) || W(e) ? e : [e];
     }
   }
 });
-function F(e, t, r = "-") {
+function L(e, t, r = "-") {
   const i = String(t).replace(new RegExp(`^${e}${r}?`), "");
   return [
-    k(i),
+    F(i),
     e
-  ].filter((o) => !!o).join(r);
+  ].filter((n) => !!n).join(r);
 }
-function ne(e) {
+function fe(e) {
   return !Array.isArray(e) && typeof e == "object";
 }
-S({
+C({
   directives: {
     bindEvents: {
       beforeMount(e, t) {
@@ -760,7 +929,7 @@ S({
     }
   },
   mixins: [
-    oe
+    ve
   ],
   inheritAttrs: !1,
   props: {
@@ -779,7 +948,7 @@ S({
      */
     animated: {
       type: Boolean,
-      default: () => s("animated", !1)
+      default: () => l("animated", !1)
     },
     /**
      * An array of event names that correlate with callback functions.
@@ -795,7 +964,7 @@ S({
      */
     defaultControlClass: {
       type: String,
-      default: () => s("defaultControlClass", "form-control")
+      default: () => l("defaultControlClass", "form-control")
     },
     /**
      * An inline field validation error.
@@ -828,7 +997,7 @@ S({
      */
     group: {
       type: Boolean,
-      default: () => s("group", !0)
+      default: () => l("group", !0)
     },
     /**
      * Some instructions to appear under the field label.
@@ -846,7 +1015,7 @@ S({
      */
     indicator: {
       type: [String, Boolean],
-      default: () => s("indicator", "spinner")
+      default: () => l("indicator", "spinner")
     },
     /**
      * The activity indicator size.
@@ -875,7 +1044,7 @@ S({
      */
     labelClass: {
       type: [Object, String],
-      default: () => s("labelClass", "form-label")
+      default: () => l("labelClass", "form-label")
     },
     /**
      * Should the control look like a pill.
@@ -942,15 +1111,15 @@ S({
       return this.defaultControlClass;
     },
     controlSizeClass() {
-      return F(this.size, this.controlClass);
+      return L(this.size, this.controlClass);
     },
     formGroupClasses() {
       return Object.assign({
-        [this.size && F(this.size, this.componentName)]: !!this.size,
+        [this.size && L(this.size, this.componentName)]: !!this.size,
         animated: this.animated,
         "default-empty": this.defaultEmpty,
         "form-group": this.group,
-        [this.size && F(this.size, "form-group")]: !!this.size,
+        [this.size && L(this.size, "form-group")]: !!this.size,
         "has-activity": this.activity,
         "has-changed": this.hasChanged,
         "has-focus": this.hasFocus,
@@ -961,7 +1130,7 @@ S({
         [this.$attrs.class]: !!this.$attrs.class,
         [this.$attrs.id]: !!this.$attrs.id
       }, !!this.componentName && {
-        [k(this.componentName)]: !0
+        [F(this.componentName)]: !0
       });
     },
     controlClasses() {
@@ -1019,9 +1188,9 @@ S({
       }), e.addEventListener(
         e.tagName === "SELECT" ? "change" : "input",
         () => t(e.value)
-      ), this.nativeEvents.forEach((o) => {
-        e.addEventListener(o, (a) => {
-          this.$emit(o, a);
+      ), this.nativeEvents.forEach((n) => {
+        e.addEventListener(n, (s) => {
+          this.$emit(n, s);
         });
       });
     },
@@ -1038,7 +1207,7 @@ S({
     },
     getFieldErrors() {
       let e = this.error || this.errors;
-      return this.errors && ne(this.errors) && (e = this.errors[this.$attrs.name || this.$attrs.id]), !e || Array.isArray(e) || ne(e) ? e : [e];
+      return this.errors && fe(this.errors) && (e = this.errors[this.$attrs.name || this.$attrs.id]), !e || Array.isArray(e) || fe(e) ? e : [e];
     },
     shouldChangeOnFocus() {
       return !this.getInputField().readOnly;
@@ -1048,50 +1217,53 @@ S({
     }
   }
 });
-const Ei = S({
+const tn = C({
   name: "InputField",
-  extends: $i
+  components: {
+    ActivityIndicator: bt
+  },
+  extends: en
 });
-const Oi = (e, t) => {
+const rn = (e, t) => {
   const r = e.__vccOpts || e;
-  for (const [i, o] of t)
-    r[i] = o;
+  for (const [i, n] of t)
+    r[i] = n;
   return r;
-}, Fi = ["for"], xi = { class: "form-group-inner" }, wi = ["innerHTML"], zi = ["innerHTML"];
-function Bi(e, t, r, i, o, a) {
-  const we = Be("activity-indicator"), ze = Ie("bind-events");
-  return u(), f("div", {
-    class: N(["input-field form-group", e.formGroupClasses])
+}, nn = ["for"], on = { class: "form-group-inner" }, sn = ["innerHTML"], an = ["innerHTML"];
+function ln(e, t, r, i, n, s) {
+  const O = We("activity-indicator"), z = Ge("bind-events");
+  return a(), u("div", {
+    class: V(["input-field form-group", e.formGroupClasses])
   }, [
-    h(e.$slots, "label", {}, () => [
-      e.label ? (u(), f("label", {
+    p(e.$slots, "label", {}, () => [
+      e.label ? (a(), u("label", {
         key: 0,
         ref: "label",
-        class: N(e.labelClass),
+        class: V(e.labelClass),
         for: e.id
-      }, L(e.label), 11, Fi)) : y("", !0)
+      }, D(e.label), 11, nn)) : y("", !0)
     ]),
-    V("div", xi, [
-      h(e.$slots, "control", {}, () => [
-        e.$slots.icon ? (u(), f("div", {
+    R("div", on, [
+      p(e.$slots, "control", {}, () => [
+        e.$slots.icon ? (a(), u("div", {
           key: 0,
           class: "form-group-inner-icon",
-          onClick: t[0] || (t[0] = (...$) => e.focus && e.focus(...$))
+          onClick: t[0] || (t[0] = (...f) => e.focus && e.focus(...f))
         }, [
-          h(e.$slots, "icon")
+          p(e.$slots, "icon")
         ])) : y("", !0),
-        Te(V("input", Ne({
+        qe(R("input", _e({
           ref: "field",
-          "onUpdate:modelValue": t[1] || (t[1] = ($) => e.currentValue = $)
+          "onUpdate:modelValue": t[1] || (t[1] = (f) => e.currentValue = f)
         }, e.controlAttributes), null, 16), [
-          [Le, e.currentValue],
-          [ze]
+          [Ye, e.currentValue],
+          [z]
         ])
       ]),
-      h(e.$slots, "activity", {}, () => [
-        Ve(De, { name: "input-field-fade" }, {
-          default: Me(() => [
-            e.activity ? (u(), Pe(we, {
+      p(e.$slots, "activity", {}, () => [
+        Je(Ke, { name: "input-field-fade" }, {
+          default: Qe(() => [
+            e.activity ? (a(), pe(O, {
               key: "activity",
               ref: "activity",
               type: e.indicator,
@@ -1102,28 +1274,28 @@ function Bi(e, t, r, i, o, a) {
         })
       ])
     ]),
-    h(e.$slots, "feedback", Ue(Re({ invalid: e.invalid, invalidFeedback: e.invalidFeedback, valid: e.valid, validFeedback: e.validFeedback })), () => [
-      e.invalidFeedback ? (u(), f("div", {
+    p(e.$slots, "feedback", Xe(et({ invalid: e.invalid, invalidFeedback: e.invalidFeedback, valid: e.valid, validFeedback: e.validFeedback })), () => [
+      e.invalidFeedback ? (a(), u("div", {
         key: 0,
         class: "invalid-feedback",
         invalid: "",
         innerHTML: e.invalidFeedback
-      }, null, 8, wi)) : e.validFeedback ? (u(), f("div", {
+      }, null, 8, sn)) : e.validFeedback ? (a(), u("div", {
         key: 1,
         class: "valid-feedback",
         valid: "",
         innerHTML: e.validFeedback
-      }, null, 8, zi)) : y("", !0)
+      }, null, 8, an)) : y("", !0)
     ]),
-    h(e.$slots, "help", {}, () => [
-      e.helpText ? (u(), f("small", {
+    p(e.$slots, "help", {}, () => [
+      e.helpText ? (a(), u("small", {
         key: 0,
         ref: "help"
-      }, L(e.helpText), 513)) : y("", !0)
+      }, D(e.helpText), 513)) : y("", !0)
     ])
   ], 2);
 }
-const Ti = /* @__PURE__ */ Oi(Ei, [["render", Bi]]);
+const dn = /* @__PURE__ */ rn(tn, [["render", ln]]);
 export {
-  Ti as InputField
+  dn as InputField
 };

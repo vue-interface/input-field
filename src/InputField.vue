@@ -1,9 +1,13 @@
 <script lang="ts">
+import { ActivityIndicator } from '@vue-interface/activity-indicator';
 import { FormControl } from '@vue-interface/form-control';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'InputField',
+    components: {
+        ActivityIndicator
+    },
     extends: FormControl
 });
 </script>

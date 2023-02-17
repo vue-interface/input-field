@@ -49,7 +49,7 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         default: () => any;
     };
     modelValue: {
-        type: (StringConstructor | ObjectConstructor | ArrayConstructor | NumberConstructor)[];
+        type: (StringConstructor | ObjectConstructor | NumberConstructor | ArrayConstructor)[];
         default: undefined;
     };
     plaintext: BooleanConstructor;
@@ -185,7 +185,7 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
         default: () => any;
     };
     modelValue: {
-        type: (StringConstructor | ObjectConstructor | ArrayConstructor | NumberConstructor)[];
+        type: (StringConstructor | ObjectConstructor | NumberConstructor | ArrayConstructor)[];
         default: undefined;
     };
     plaintext: BooleanConstructor;
