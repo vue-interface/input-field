@@ -1,4 +1,4 @@
-import { defineComponent as C, inject as He, toRaw as Ze, openBlock as s, createElementBlock as u, normalizeClass as R, normalizeStyle as We, createElementVNode as D, createBlock as ye, resolveDynamicComponent as Ge, toDisplayString as M, createCommentVNode as y, resolveComponent as qe, resolveDirective as Ye, renderSlot as p, normalizeProps as G, guardReactiveProps as q, withDirectives as _e, mergeProps as Je, vModelDynamic as Ke, createVNode as Qe, Transition as Xe, withCtx as et } from "vue";
+import { defineComponent as C, inject as He, toRaw as Ze, openBlock as s, createElementBlock as u, normalizeClass as V, normalizeStyle as We, createElementVNode as R, createBlock as ye, resolveDynamicComponent as Ge, toDisplayString as D, createCommentVNode as y, resolveComponent as qe, resolveDirective as Ye, renderSlot as p, normalizeProps as G, guardReactiveProps as q, withDirectives as _e, mergeProps as Je, vModelDynamic as Ke, createVNode as Qe, Transition as Xe, withCtx as et } from "vue";
 var tt = Object.defineProperty, rt = (e, t, r) => t in e ? tt(e, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[t] = r, it = (e, t, r) => (rt(e, typeof t != "symbol" ? t + "" : t, r), r), x = function() {
   return x = Object.assign || function(e) {
     for (var t, r = 1, i = arguments.length; r < i; r++) {
@@ -159,12 +159,12 @@ const ht = C({
 };
 function yt(e, t, r, i, n, l) {
   return s(), u("div", {
-    class: R(["activity-indicator", e.classes]),
+    class: V(["activity-indicator", e.classes]),
     style: We(e.style)
   }, [
-    D("div", pt, [
+    R("div", pt, [
       (s(), ye(Ge(e.component()), { class: "mx-auto" })),
-      e.label ? (s(), u("div", vt, M(e.label), 1)) : y("", !0)
+      e.label ? (s(), u("div", vt, D(e.label), 1)) : y("", !0)
     ])
   ], 6);
 }
@@ -261,23 +261,23 @@ function W(e) {
   var t = typeof e;
   return e != null && (t == "object" || t == "function");
 }
-var Tt = "[object AsyncFunction]", Lt = "[object Function]", Rt = "[object GeneratorFunction]", Dt = "[object Proxy]";
+var Tt = "[object AsyncFunction]", Lt = "[object Function]", Vt = "[object GeneratorFunction]", Rt = "[object Proxy]";
 function $e(e) {
   if (!W(e))
     return !1;
   var t = g(e);
-  return t == Lt || t == Rt || t == Tt || t == Dt;
+  return t == Lt || t == Vt || t == Tt || t == Rt;
 }
-var Mt = c["__core-js_shared__"];
-const I = Mt;
+var Dt = c["__core-js_shared__"];
+const I = Dt;
 var Q = function() {
   var e = /[^.]+$/.exec(I && I.keys && I.keys.IE_PROTO || "");
   return e ? "Symbol(src)_1." + e : "";
 }();
-function Pt(e) {
+function Mt(e) {
   return !!Q && Q in e;
 }
-var Vt = Function.prototype, Ut = Vt.toString;
+var Pt = Function.prototype, Ut = Pt.toString;
 function h(e) {
   if (e != null) {
     try {
@@ -295,7 +295,7 @@ var Ht = /[\\^$.*+?()[\]{}|]/g, Zt = /^\[object .+?Constructor\]$/, Wt = Functio
   "^" + qt.call(Yt).replace(Ht, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
 );
 function Jt(e) {
-  if (!W(e) || Pt(e))
+  if (!W(e) || Mt(e))
     return !1;
   var t = $e(e) ? _t : Zt;
   return t.test(h(e));
@@ -308,7 +308,7 @@ function A(e, t) {
   return Jt(r) ? r : void 0;
 }
 var Qt = A(c, "WeakMap");
-const P = Qt;
+const M = Qt;
 var Xt = 9007199254740991;
 function Ce(e) {
   return typeof e == "number" && e > -1 && e % 1 == 0 && e <= Xt;
@@ -342,21 +342,21 @@ o[hr] = o[fr] = o[Er] = o[pr] = o[Or] = o[vr] = o[yr] = o[br] = o[mr] = o[gr] = 
 function Lr(e) {
   return w(e) && Ce(e.length) && !!o[g(e)];
 }
-function Rr(e) {
+function Vr(e) {
   return function(t) {
     return e(t);
   };
 }
-var ke = typeof exports == "object" && exports && !exports.nodeType && exports, $ = ke && typeof module == "object" && module && !module.nodeType && module, Dr = $ && $.exports === ke, T = Dr && me.process, Mr = function() {
+var ke = typeof exports == "object" && exports && !exports.nodeType && exports, $ = ke && typeof module == "object" && module && !module.nodeType && module, Rr = $ && $.exports === ke, T = Rr && me.process, Dr = function() {
   try {
     var e = $ && $.require && $.require("util").types;
     return e || T && T.binding && T.binding("util");
   } catch {
   }
 }();
-const re = Mr;
-var ie = re && re.isTypedArray, Pr = ie ? Rr(ie) : Lr;
-const Vr = Pr;
+const re = Dr;
+var ie = re && re.isTypedArray, Mr = ie ? Vr(ie) : Lr;
+const Pr = Mr;
 function Ur(e, t) {
   return function(r) {
     return e(t(r));
@@ -374,7 +374,7 @@ function qr(e) {
   return t;
 }
 var Yr = A(c, "Map");
-const V = Yr;
+const P = Yr;
 function xe(e) {
   return e == null ? "" : Se(e);
 }
@@ -596,7 +596,7 @@ var ci = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 function di(e) {
   return ci.test(e);
 }
-var we = "\\ud800-\\udfff", hi = "\\u0300-\\u036f", fi = "\\ufe20-\\ufe2f", pi = "\\u20d0-\\u20ff", vi = hi + fi + pi, Fe = "\\u2700-\\u27bf", ze = "a-z\\xdf-\\xf6\\xf8-\\xff", yi = "\\xac\\xb1\\xd7\\xf7", bi = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", mi = "\\u2000-\\u206f", gi = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", Be = "A-Z\\xc0-\\xd6\\xd8-\\xde", ji = "\\ufe0e\\ufe0f", Ne = yi + bi + mi + gi, Ie = "['’]", ne = "[" + Ne + "]", Si = "[" + vi + "]", Te = "\\d+", $i = "[" + Fe + "]", Le = "[" + ze + "]", Re = "[^" + we + Ne + Te + Fe + ze + Be + "]", Ci = "\\ud83c[\\udffb-\\udfff]", Ai = "(?:" + Si + "|" + Ci + ")", Ei = "[^" + we + "]", De = "(?:\\ud83c[\\udde6-\\uddff]){2}", Me = "[\\ud800-\\udbff][\\udc00-\\udfff]", b = "[" + Be + "]", Oi = "\\u200d", oe = "(?:" + Le + "|" + Re + ")", ki = "(?:" + b + "|" + Re + ")", se = "(?:" + Ie + "(?:d|ll|m|re|s|t|ve))?", ae = "(?:" + Ie + "(?:D|LL|M|RE|S|T|VE))?", Pe = Ai + "?", Ve = "[" + ji + "]?", xi = "(?:" + Oi + "(?:" + [Ei, De, Me].join("|") + ")" + Ve + Pe + ")*", wi = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", Fi = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", zi = Ve + Pe + xi, Bi = "(?:" + [$i, De, Me].join("|") + ")" + zi, Ni = RegExp([
+var we = "\\ud800-\\udfff", hi = "\\u0300-\\u036f", fi = "\\ufe20-\\ufe2f", pi = "\\u20d0-\\u20ff", vi = hi + fi + pi, Fe = "\\u2700-\\u27bf", ze = "a-z\\xdf-\\xf6\\xf8-\\xff", yi = "\\xac\\xb1\\xd7\\xf7", bi = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", mi = "\\u2000-\\u206f", gi = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", Be = "A-Z\\xc0-\\xd6\\xd8-\\xde", ji = "\\ufe0e\\ufe0f", Ne = yi + bi + mi + gi, Ie = "['’]", ne = "[" + Ne + "]", Si = "[" + vi + "]", Te = "\\d+", $i = "[" + Fe + "]", Le = "[" + ze + "]", Ve = "[^" + we + Ne + Te + Fe + ze + Be + "]", Ci = "\\ud83c[\\udffb-\\udfff]", Ai = "(?:" + Si + "|" + Ci + ")", Ei = "[^" + we + "]", Re = "(?:\\ud83c[\\udde6-\\uddff]){2}", De = "[\\ud800-\\udbff][\\udc00-\\udfff]", b = "[" + Be + "]", Oi = "\\u200d", oe = "(?:" + Le + "|" + Ve + ")", ki = "(?:" + b + "|" + Ve + ")", se = "(?:" + Ie + "(?:d|ll|m|re|s|t|ve))?", ae = "(?:" + Ie + "(?:D|LL|M|RE|S|T|VE))?", Me = Ai + "?", Pe = "[" + ji + "]?", xi = "(?:" + Oi + "(?:" + [Ei, Re, De].join("|") + ")" + Pe + Me + ")*", wi = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", Fi = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", zi = Pe + Me + xi, Bi = "(?:" + [$i, Re, De].join("|") + ")" + zi, Ni = RegExp([
   b + "?" + Le + "+" + se + "(?=" + [ne, b, "$"].join("|") + ")",
   ki + "+" + ae + "(?=" + [ne, b + oe, "$"].join("|") + ")",
   b + "?" + oe + "+" + se,
@@ -612,20 +612,20 @@ function Ii(e) {
 function Ti(e, t, r) {
   return e = xe(e), t = r ? void 0 : t, t === void 0 ? di(e) ? Ii(e) : ui(e) : e.match(t) || [];
 }
-var Li = "['’]", Ri = RegExp(Li, "g");
-function Di(e) {
+var Li = "['’]", Vi = RegExp(Li, "g");
+function Ri(e) {
   return function(t) {
-    return _r(Ti(ai(t).replace(Ri, "")), e, "");
+    return _r(Ti(ai(t).replace(Vi, "")), e, "");
   };
 }
-var Mi = A(c, "DataView");
-const U = Mi;
-var Pi = A(c, "Promise");
-const H = Pi;
-var Vi = A(c, "Set");
-const Z = Vi;
-var le = "[object Map]", Ui = "[object Object]", ue = "[object Promise]", ce = "[object Set]", de = "[object WeakMap]", he = "[object DataView]", Hi = h(U), Zi = h(V), Wi = h(H), Gi = h(Z), qi = h(P), d = g;
-(U && d(new U(new ArrayBuffer(1))) != he || V && d(new V()) != le || H && d(H.resolve()) != ue || Z && d(new Z()) != ce || P && d(new P()) != de) && (d = function(e) {
+var Di = A(c, "DataView");
+const U = Di;
+var Mi = A(c, "Promise");
+const H = Mi;
+var Pi = A(c, "Set");
+const Z = Pi;
+var le = "[object Map]", Ui = "[object Object]", ue = "[object Promise]", ce = "[object Set]", de = "[object WeakMap]", he = "[object DataView]", Hi = h(U), Zi = h(P), Wi = h(H), Gi = h(Z), qi = h(M), d = g;
+(U && d(new U(new ArrayBuffer(1))) != he || P && d(new P()) != le || H && d(H.resolve()) != ue || Z && d(new Z()) != ce || M && d(new M()) != de) && (d = function(e) {
   var t = g(e), r = t == Ui ? e.constructor : void 0, i = r ? h(r) : "";
   if (i)
     switch (i) {
@@ -647,7 +647,7 @@ var _i = "[object Map]", Ji = "[object Set]", Ki = Object.prototype, Qi = Ki.has
 function fe(e) {
   if (e == null)
     return !0;
-  if (er(e) && (je(e) || typeof e == "string" || typeof e.splice == "function" || dr(e) || Vr(e) || sr(e)))
+  if (er(e) && (je(e) || typeof e == "string" || typeof e.splice == "function" || dr(e) || Pr(e) || sr(e)))
     return !e.length;
   var t = Yi(e);
   if (t == _i || t == Ji)
@@ -659,7 +659,7 @@ function fe(e) {
       return !1;
   return !0;
 }
-var Xi = Di(function(e, t, r) {
+var Xi = Ri(function(e, t, r) {
   return e + (r ? "-" : "") + t.toLowerCase();
 });
 const F = Xi;
@@ -672,9 +672,11 @@ function pe(e, t, r = "-") {
 }
 const en = C({
   directives: {
-    bindEvents(e, t) {
-      var r, i;
-      (i = (r = t.instance) == null ? void 0 : r.bindEvents) == null || i.call(r, e);
+    bindEvents: {
+      created(e, t) {
+        var r, i;
+        (i = (r = t.instance) == null ? void 0 : r.bindEvents) == null || i.call(r, e);
+      }
     }
   },
   mixins: [
@@ -820,7 +822,7 @@ const en = C({
   ],
   data() {
     return {
-      // currentValue: this.modelValue,
+      currentValue: null,
       hasChanged: !1,
       hasFocus: !1,
       isDirty: !1,
@@ -830,10 +832,10 @@ const en = C({
   computed: {
     model: {
       get() {
-        return this.modelValue;
+        return this.modelValue !== void 0 ? this.modelValue : this.currentValue;
       },
       set(e) {
-        this.hasChanged = !0, this.isEmpty = fe(e), this.$emit("update:modelValue", e);
+        this.currentValue = e, this.hasChanged = !0, this.isEmpty = fe(e), this.$emit("update:modelValue", e);
       }
     },
     id() {
@@ -863,8 +865,8 @@ const en = C({
     controlAttributes() {
       return Object.assign({}, this.$attrs, {
         id: this.id,
-        class: this.controlClasses,
-        value: this.modelValue
+        class: this.controlClasses
+        // value: this.model
       });
     },
     controlClasses() {
@@ -896,13 +898,6 @@ const en = C({
       return "form-control-plaintext";
     }
   },
-  // watch: {
-  //     currentValue(value) {
-  //         this.hasChanged = true;
-  //         this.isEmpty = isEmpty(value);
-  //         this.$emit('update:modelValue', this.value);
-  //     }
-  // },
   methods: {
     bindEvents(e) {
       for (const t of this.$options.emits)
@@ -1253,17 +1248,17 @@ const rn = (e, t) => {
 function ln(e, t, r, i, n, l) {
   const E = qe("activity-indicator"), z = Ye("bind-events");
   return s(), u("div", {
-    class: R(["input-field", e.formGroupClasses])
+    class: V(["input-field", e.formGroupClasses])
   }, [
     p(e.$slots, "label", {}, () => [
       e.label ? (s(), u("label", {
         key: 0,
         ref: "label",
-        class: R(e.labelClass),
+        class: V(e.labelClass),
         for: e.id
-      }, M(e.label), 11, nn)) : y("", !0)
+      }, D(e.label), 11, nn)) : y("", !0)
     ]),
-    D("div", on, [
+    R("div", on, [
       p(e.$slots, "control", G(q({ bindEvents: e.bindEvents, controlAttributes: e.controlAttributes })), () => [
         e.$slots.icon ? (s(), u("div", {
           key: 0,
@@ -1272,7 +1267,7 @@ function ln(e, t, r, i, n, l) {
         }, [
           p(e.$slots, "icon")
         ])) : y("", !0),
-        _e(D("input", Je({
+        _e(R("input", Je({
           ref: "field",
           "onUpdate:modelValue": t[1] || (t[1] = (f) => e.model = f)
         }, e.controlAttributes), null, 16), [
@@ -1311,7 +1306,7 @@ function ln(e, t, r, i, n, l) {
       e.helpText ? (s(), u("small", {
         key: 0,
         ref: "help"
-      }, M(e.helpText), 513)) : y("", !0)
+      }, D(e.helpText), 513)) : y("", !0)
     ])
   ], 2);
 }

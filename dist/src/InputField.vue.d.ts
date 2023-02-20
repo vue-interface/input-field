@@ -63,6 +63,7 @@ declare const _sfc_main: import("vue").DefineComponent<{}, {}, {}, {}, {}, impor
     };
     valid: BooleanConstructor;
 }, unknown, {
+    currentValue: null;
     hasChanged: boolean;
     hasFocus: boolean;
     isDirty: boolean;
