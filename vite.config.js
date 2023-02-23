@@ -15,7 +15,7 @@ export default defineConfig({
             fileName,
         },
         rollupOptions: {
-            external: ['vue'],
+            external: ['vue', '@vue-interface/form-control'],
             output: {
                 globals: {
                     vue: 'Vue'
