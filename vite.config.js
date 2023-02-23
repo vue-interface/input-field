@@ -15,10 +15,16 @@ export default defineConfig({
             fileName,
         },
         rollupOptions: {
-            external: ['vue', '@vue-interface/form-control'],
+            external: [
+                '@vue-interface/activity-indicator',
+                '@vue-interface/form-control',
+                'vue',
+            ],
             output: {
                 globals: {
-                    vue: 'Vue'
+                    '@vue-interface/activity-indicator': 'ActivityIndicator',
+                    '@vue-interface/form-control': 'FormControl',
+                    'vue': 'Vue'
                 },
             }
         },
