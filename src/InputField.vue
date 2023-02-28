@@ -25,7 +25,7 @@ export default defineComponent({
                 {{ label }}
             </label>
         </slot>
-
+        
         <div class="form-group-inner">
             <slot
                 name="control"
@@ -45,7 +45,7 @@ export default defineComponent({
 
             <slot name="activity">
                 <transition name="input-field-fade">
-                    <activity-indicator
+                    <ActivityIndicator
                         v-if="activity"
                         key="activity"
                         ref="activity"
