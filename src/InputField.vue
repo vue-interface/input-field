@@ -44,14 +44,14 @@ export default defineComponent({
             </slot>
 
             <slot name="activity">
-                <transition name="input-field-fade">
+                <Transition name="input-field-fade">
                     <ActivityIndicator
                         v-if="activity"
                         key="activity"
                         ref="activity"
                         :type="indicator"
                         :size="indicatorSize || size" />
-                </transition>
+                </Transition>
             </slot>
         </div>
 
