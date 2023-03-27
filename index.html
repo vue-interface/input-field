@@ -65,6 +65,15 @@
                 <span v-if="!showActivity">Show</span><span v-else>Hide</span> Activity
             </button>
 
+            <h2 class="text-2xl mt-6 mb-3">Animated Labels</h2>
+
+            <input-field size="sm" label="Small" class="mb-3" animated></input-field>
+            <input-field size="md" label="Medium" class="mb-3" animated></input-field>
+            <input-field v-model="value" size="md" label="Medium" class="mb-3" animated></input-field>
+
+            <input-field value="Some Value" size="md" label="Medium" class="mb-3" animated></input-field>
+            <input-field size="lg" label="Large" class="mb-3" animated></input-field>
+
             <h2 class="text-2xl mt-6 mb-3">Validation</h2>
 
             <input-field label="Empty Array of Errors" :errors="[]" class="mb-3"></input-field>

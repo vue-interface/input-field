@@ -13,9 +13,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <div
-        class="input-field"
-        :class="formGroupClasses">
+    <div :class="formGroupClasses">
         <slot name="label">
             <label
                 v-if="label"
