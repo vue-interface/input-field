@@ -1,14 +1,11 @@
 module.exports = {
     content: [
-        "./index.html"
+        './index.html'
     ],
     theme: {
         extend: {},
     },
-    plugins: [
-        ...require('@vue-interface/form-control/tailwindcss')
-    ],
-    safelist: [
-        ...require('@vue-interface/form-control/tailwindcss/safelist')()
+    presets: [
+        require('@vue-interface/form-control/tailwindcss')
     ]
 };
