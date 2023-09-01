@@ -1,25 +1,36 @@
-<script lang="ts">
-import { ActivityIndicator } from '@vue-interface/activity-indicator';
-import { FormControl } from '@vue-interface/form-control';
-import { defineComponent } from 'vue';
+<script setup lang="ts" generic="T, V">
+import type { CheckedFormControlProps, FormControlEvents, FormControlSlots } from '@vue-interface/form-control';
+import { FormControlErrors, FormControlFeedback, useFormControl } from '@vue-interface/form-control';
+import { ref, useSlots } from 'vue';
 
-export default defineComponent({
-    name: 'InputField',
-    components: {
-        ActivityIndicator
-    },
-    extends: FormControl
+defineOptions({
+    inheritAttrs: false
 });
+
+defineSlots<FormControlSlots<T>>();
+
+const emit = defineEmits<FormControlEvents<T>>();
+
+const props = withDefaults(defineProps<CheckedFormControlProps<T, V>>(), {
+    formControlClass: 'form-control',
+    labelClass: 'form-label'
+});
+
+const { controlAttributes, formGroupClasses, model, onClick, onBlur, onFocus } = useFormControl(props, emit);
+
+const field = ref<HTMLInputElement>();
 </script>
 
 <template>
-    <div :class="formGroupClasses">
+    <div
+        class="input-field"
+        :class="formGroupClasses">
         <slot name="label">
             <label
                 v-if="label"
                 ref="label"
                 :class="labelClass"
-                :for="id">
+                :for="controlAttributes.id">
                 {{ label }}
             </label>
         </slot>
@@ -27,18 +38,20 @@ export default defineComponent({
         <div class="form-group-inner">
             <slot
                 name="control"
-                v-bind="{ bindEvents, controlAttributes }">
+                v-bind="{ onClick, onBlur, onFocus, controlAttributes }">
                 <div
-                    v-if="$slots.icon"
+                    v-if="useSlots().icon"
                     class="form-group-inner-icon"
-                    @click="focus">
+                    @click="field.focus">
                     <slot name="icon" />
                 </div>
                 <input
                     ref="field"
                     v-model="model"
-                    v-bind-events
-                    v-bind="controlAttributes">
+                    v-bind="controlAttributes"
+                    @click="onClick"
+                    @blur="onBlur"
+                    @focus="onFocus">
             </slot>
 
             <slot name="activity">
@@ -58,9 +71,9 @@ export default defineComponent({
             v-bind="{ error, errors, id: $attrs.id, name: $attrs.name }">        
             <FormControlErrors
                 v-if="!!(error || errors)"
-                :id="$attrs.id"
+                :id="$attrs.id && String($attrs.id)"
                 v-slot="{ error }"
-                :name="$attrs.name"
+                :name="$attrs.name && String($attrs.name)"
                 :error="error"
                 :errors="errors">
                 <div
@@ -85,7 +98,9 @@ export default defineComponent({
             </FormControlFeedback>
         </slot>
 
-        <slot name="help">
+        <slot
+            name="help"
+            v-bind="{ helpText }">
             <small
                 v-if="helpText"
                 ref="help">
