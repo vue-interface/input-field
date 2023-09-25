@@ -104,8 +104,13 @@
                 data() {
                     return {
                         showActivity: false,
-                        value: 'testing...'
+                        value: undefined
                     };
+                },
+                mounted() {
+                    setTimeout(() => {
+                        this.value = 'testing...'
+                    }, 1000)
                 }
             });
 

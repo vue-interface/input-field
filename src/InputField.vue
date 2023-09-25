@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<CheckedFormControlProps<T, V>>(), {
     labelClass: 'form-label'
 });
 
-const { controlAttributes, formGroupClasses, model, onClick, onBlur, onFocus } = useFormControl(props, emit);
+const { controlAttributes, formGroupClasses, model, onClick, onBlur, onFocus } = useFormControl({props, emit});
 
 const field = ref<HTMLInputElement>();
 </script>
