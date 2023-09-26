@@ -1,3 +1,10 @@
+# [1.0.0-beta.22](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.21...v1.0.0-beta.22) (2023-09-26)
+
+
+### Bug Fixes
+
+* updated tsconfig ([21f6ebf](https://github.com/vue-interface/input-field/commit/21f6ebf2201b68eaa815959755285075b065cdd9))
+
 # [1.0.0-beta.21](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2023-09-26)
 
 
