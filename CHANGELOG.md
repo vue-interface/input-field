@@ -1,3 +1,10 @@
+# [1.0.0-beta.23](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.22...v1.0.0-beta.23) (2023-10-05)
+
+
+### Bug Fixes
+
+* updated package.json ([a8f6981](https://github.com/vue-interface/input-field/commit/a8f6981d0dfe79213b23db4c0b3f6ea7e6b23449))
+
 # [1.0.0-beta.22](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.21...v1.0.0-beta.22) (2023-09-26)
 
 
