@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<CheckedFormControlProps<T, V>>(), {
     labelClass: 'form-label'
 });
 
-const { controlAttributes, formGroupClasses, model, onClick, onBlur, onFocus } = useFormControl({props, emit});
+const { controlAttributes, formGroupClasses, model, onClick, onBlur, onFocus } = useFormControl({ props, emit });
 
 const field = ref<HTMLInputElement>();
 </script>
@@ -51,7 +51,8 @@ const field = ref<HTMLInputElement>();
                     v-bind="controlAttributes"
                     @click="onClick"
                     @blur="onBlur"
-                    @focus="onFocus">
+                    @focus="onFocus"
+                    @change="emit('change', model)">
             </slot>
 
             <slot name="activity">

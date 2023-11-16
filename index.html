@@ -13,7 +13,7 @@
                 Value: {{ value }}
             </div>
 
-            <input-field v-model="value" label="Text Field" placeholder="Some placeholder" class="mb-3"></input-field>
+            <input-field v-model="value" label="Text Field" placeholder="Some placeholder" class="mb-3" @change="onChange"></input-field>
             <input-field type="password" label="Password Field" class="mb-3"></input-field>
             <input-field label="Descriptive Text Field" help-text="Some helpful text goes here." class="mb-3"></input-field>
             <input-field type="email" label="Email Field" placeholder="you@example.com" class="mb-3"></input-field>
@@ -111,6 +111,11 @@
                     setTimeout(() => {
                         this.value = 'testing...'
                     }, 1000)
+                },
+                methods: {
+                    onChange(value) {
+                        console.log('change', value)
+                    }
                 }
             });
 
