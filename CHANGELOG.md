@@ -1,3 +1,12 @@
+# [1.0.0-beta.24](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.23...v1.0.0-beta.24) (2023-11-20)
+
+
+### Bug Fixes
+
+* added change event and updated form-control dep ([ecd8749](https://github.com/vue-interface/input-field/commit/ecd8749a9548fe5cdbb024d26a7697ffd39b5100))
+* missing import ([abb13bc](https://github.com/vue-interface/input-field/commit/abb13bc2d7b35fb66bc5faf0cef8f7b36a5bf5be))
+* updated package.json ([662f030](https://github.com/vue-interface/input-field/commit/662f0306478ac5c1b668ff4277ad5c40460ea4fb))
+
 # [1.0.0-beta.23](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.22...v1.0.0-beta.23) (2023-10-05)
 
 
