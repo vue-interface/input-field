@@ -1,4 +1,5 @@
 <script setup lang="ts" generic="T, V">
+import { ActivityIndicator } from '@vue-interface/activity-indicator';
 import type { CheckedFormControlProps, FormControlEvents, FormControlSlots } from '@vue-interface/form-control';
 import { FormControlErrors, FormControlFeedback, useFormControl } from '@vue-interface/form-control';
 import { ref, useSlots } from 'vue';
