@@ -1,3 +1,10 @@
+# [1.0.0-beta.25](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.24...v1.0.0-beta.25) (2024-01-30)
+
+
+### Bug Fixes
+
+* form control version in package.json ([67727a5](https://github.com/vue-interface/input-field/commit/67727a5cd8e8a0f3724a57d4fb5cd229624ebdcd))
+
 # [1.0.0-beta.24](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.23...v1.0.0-beta.24) (2023-11-20)
 
 
