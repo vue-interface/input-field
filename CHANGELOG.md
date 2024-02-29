@@ -1,3 +1,10 @@
+# [1.0.0-beta.26](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.25...v1.0.0-beta.26) (2024-02-29)
+
+
+### Bug Fixes
+
+* issue with field not showing laravel style errors ([66fc0d4](https://github.com/vue-interface/input-field/commit/66fc0d47f756f25fc38c21b66e0576345287dfd9))
+
 # [1.0.0-beta.25](https://github.com/vue-interface/input-field/compare/v1.0.0-beta.24...v1.0.0-beta.25) (2024-01-30)
 
 
