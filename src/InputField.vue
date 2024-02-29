@@ -70,12 +70,12 @@ const field = ref<HTMLInputElement>();
 
         <slot
             name="errors"
-            v-bind="{ error, errors, id: $attrs.id, name: $attrs.name }">        
+            v-bind="{ error, errors, id: $attrs.id, name: $attrs.name }">  
             <FormControlErrors
                 v-if="!!(error || errors)"
-                :id="$attrs.id && String($attrs.id)"
+                :id="id"
                 v-slot="{ error }"
-                :name="$attrs.name && String($attrs.name)"
+                :name="name"
                 :error="error"
                 :errors="errors">
                 <div
